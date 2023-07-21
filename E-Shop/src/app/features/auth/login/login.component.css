@@ -1,13 +1,14 @@
 div.form {
     display: block;
     text-align: center;
+    margin-top: 5%;
+    /* background-color: darksalmon; */
 }
 
 form {
     display: inline-block;
     margin-left: auto;
     margin-right: auto;
-    
 }
 
 h2 {
