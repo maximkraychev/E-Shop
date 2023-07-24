@@ -1,7 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~@fortawesome/fontawesome-free/css/all.css';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 body{
-    background-color: rgb(89, 118, 128) !important;
+    background-color: #F8F9FA;
 }
+
+
+h1{
+    font-family: 'Open Sans', sans-serif;   
+    font-style: italic
+}
+a{
+    font-family: 'Open Sans', sans-serif; 
+    font-style: italic  
+}
+span {
+    font-family: 'Open Sans', sans-serif;   
+    font-style: italic
+}
+
+section {
+    padding: 150px 0;
+}
+
+/* 
+ body{ 
+    background-color: rgb(89, 118, 128) !important; 
+     background-image: url('/assets/background3.jpg');
+    background-size: cover;
+ }  */

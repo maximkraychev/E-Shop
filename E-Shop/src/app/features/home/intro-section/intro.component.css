@@ -1,0 +1,13 @@
+
+.intro-bg {
+    background-image: url('/assets/intro-picture1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+.overlay-box {
+    background-color: rgba(71, 69, 69, 0.3); /* Adjust the color and transparency here */
+    padding: 20px; /* Adjust the padding as needed */
+    border-radius: 10px; /* Add rounded corners to the box */
+  }

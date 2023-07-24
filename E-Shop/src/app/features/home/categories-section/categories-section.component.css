@@ -1,0 +1,40 @@
+header > a {
+    color: #6C757D;
+    text-decoration: none;
+}
+
+.product-category__body {
+    text-align: center;
+    position: relative;
+}
+
+.product-category__icon {
+    text-align: center;
+    padding: 2rem;
+}
+
+.product-category__inner {
+    position: relative;
+}
+
+.anchor-category {
+    text-decoration: none;
+    color: black;
+}
+
+/* background for every list elment */
+.bg-photo {
+    background-color: rgba(221, 144, 43, 0.3);
+}
+
+.bg-finance{
+    background-color: rgb(0, 128, 0, 0.3);
+}
+
+.bg-fantasy{
+ background-color:rgba(106, 111, 208, 0.3);
+}
+
+.bg-biography{
+    background-color:rgba(111, 102, 102, 0.3);
+}
