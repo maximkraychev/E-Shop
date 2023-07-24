@@ -1,0 +1,14 @@
+header > a {
+    color: #6C757D;
+    text-decoration: none;
+}
+
+.anchor-card {
+    text-decoration: none;
+    color: black;
+}
+
+.book-img {
+    border-color: #101112;
+    justify-content: center;
+}
