@@ -8,21 +8,21 @@ body{
 }
 
 
-h1{
+.open-sans{
     font-family: 'Open Sans', sans-serif;   
     font-style: italic
 }
-a{
+.italic{
     font-family: 'Open Sans', sans-serif; 
     font-style: italic  
 }
-span {
+/* span {
     font-family: 'Open Sans', sans-serif;   
     font-style: italic
-}
+} */
 
 section {
-    padding: 150px 0;
+    padding: 100px 0;
 }
 
 /* 

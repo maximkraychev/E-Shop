@@ -1,5 +1,6 @@
 header > a {
-    color: #6C757D;
+    /* color: #6C757D; */
+    color: black;
     text-decoration: none;
 }
 

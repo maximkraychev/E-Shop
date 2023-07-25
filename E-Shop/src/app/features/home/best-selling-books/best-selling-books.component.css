@@ -1,14 +1,58 @@
-header > a {
-    color: #6C757D;
+a {
     text-decoration: none;
+}
+
+header>a {
+    /* color: #6C757D; */
+    text-decoration: none;
+    color: black;
 }
 
 .anchor-card {
     text-decoration: none;
     color: black;
+    border: 1px solid rgb(0, 0, 0, 0.1)
+}
+
+.anchor-card:hover {
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-color: rgb(0, 0, 0, 0.5);
+    /* transform: scale(1.1, 1.1);
+    background-color: rgb(108, 117, 125, 0.1); */
+
 }
 
 .book-img {
-    border-color: #101112;
     justify-content: center;
+}
+
+.book-author {
+    font-size: small;
+}
+
+.book-author:hover {
+    color: rgb(255, 0, 0, 0.5) !important;
+}
+
+.hidden {
+    /* opacity: 0; */
+    /* transition: opacity 1s ease; */
+    padding: 5px;
+    /* visibility: hidden; */
+}
+
+.hidden>a {
+    margin-right: 10px;
+    color: black;
+}
+
+.hidden>a:hover {
+    color: rgb(255, 0, 0, 0.5);
+}
+
+.anchor-card:hover .hidden {
+    display: block !important;
+    /* opacity: 1; */
+    /* visibility: visible; */
 }
