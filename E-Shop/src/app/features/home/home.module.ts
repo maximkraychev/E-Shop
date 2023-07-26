@@ -8,6 +8,7 @@ import { CategoriesSectionComponent } from './categories-section/categories-sect
 import { BestSellingBooksComponent } from './best-selling-books/best-selling-books.component';
 import { NewBooksSectionComponent } from './new-books-section/new-books-section.component';
 import { WhyChooseUsSectionComponent } from './why-choose-us-section/why-choose-us-section.component';
+import { BlogPostsSectionComponent } from './blog-posts-section/blog-posts-section.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { WhyChooseUsSectionComponent } from './why-choose-us-section/why-choose-
     CategoriesSectionComponent,
     BestSellingBooksComponent,
     NewBooksSectionComponent,
-    WhyChooseUsSectionComponent
+    WhyChooseUsSectionComponent,
+    BlogPostsSectionComponent
   ],
   imports: [
     CommonModule,

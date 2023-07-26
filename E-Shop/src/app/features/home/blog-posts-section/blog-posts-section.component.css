@@ -1,0 +1,11 @@
+a {
+    text-decoration: none;
+}
+
+.open-sans{
+    font-family: 'Open Sans', sans-serif;   
+}
+.italic{
+    font-family: 'Open Sans', sans-serif; 
+    font-style: italic  
+}
