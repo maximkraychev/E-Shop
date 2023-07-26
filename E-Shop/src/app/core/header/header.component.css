@@ -3,3 +3,12 @@
     background-color: #6C757D;
     /* border-radius: 10%; */
 }
+
+.open-sans{
+    font-family: 'Open Sans', sans-serif;   
+    font-style: italic
+}
+.italic{
+    font-family: 'Open Sans', sans-serif; 
+    font-style: italic  
+}

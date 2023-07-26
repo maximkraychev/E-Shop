@@ -56,3 +56,12 @@ header>a {
     /* opacity: 1; */
     /* visibility: visible; */
 }
+
+.open-sans{
+    font-family: 'Open Sans', sans-serif;   
+    font-style: italic
+}
+.italic{
+    font-family: 'Open Sans', sans-serif; 
+    font-style: italic  
+}

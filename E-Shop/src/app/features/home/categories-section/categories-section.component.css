@@ -39,3 +39,12 @@ header > a {
 .bg-biography{
     background-color:rgba(111, 102, 102, 0.3);
 }
+
+.open-sans{
+    font-family: 'Open Sans', sans-serif;   
+    font-style: italic
+}
+.italic{
+    font-family: 'Open Sans', sans-serif; 
+    font-style: italic  
+}

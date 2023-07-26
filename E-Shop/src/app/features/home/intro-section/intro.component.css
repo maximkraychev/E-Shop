@@ -11,3 +11,12 @@
     padding: 20px; /* Adjust the padding as needed */
     border-radius: 10px; /* Add rounded corners to the box */
   }
+
+  .open-sans{
+    font-family: 'Open Sans', sans-serif;   
+    font-style: italic
+}
+.italic{
+    font-family: 'Open Sans', sans-serif; 
+    font-style: italic  
+}
