@@ -1,32 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { Database, ref } from '@angular/fire/database';
+import { Component, inject } from '@angular/core';
+import { collection, getFirestore, getDocs, Firestore, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
 // import { onValue } from '@firebase/database';
 // import { AngularFirestore } from '@angular/fire/compat/firestore';
+//import { getFirestore } from 'firebase/firestore'
 
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css']
 })
-export class TestComponent implements OnInit {
+export class TestComponent {
 
-  constructor(private db: Database) {
+  item$: Observable<any>; 
+  firestore: Firestore = inject(Firestore);
+
+  constructor() {
+    const collectionRef = collection(this.firestore, 'test');
+    this.item$ = collectionData(collectionRef);
+    this.item$.subscribe({
+      next: (data) => {console.log(data)}
+    })
   }
 
   // ngOnInit(): void {
-  //   const dbRef = ref(this.db, 'test');
-  //   console.log(dbRef);
-  //   onValue(dbRef, (snapshot) => {
-  //     console.log(snapshot.val());
-  //   })
+  //   const db = getFirestore();
+  //   const colRef = collection(db, 'test');
+  //   getDocs(colRef)
+  //     .then((snapshot) => {
+  //       console.log(snapshot.docs);
+  //     })
   // }
-
-  // ngOnInit(): void {
-  //   const dbColection = AngularFirestore
-  //   console.log(dbColection);
-    
-  // }
-  ngOnInit(): void {
-    
-  }
 }
+
