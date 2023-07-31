@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "book-store-34ab8": {
+      "hosting": {
+        "BookShop": [
+          "book-store-34ab8"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "book-store-34ab8"
+  }
+}

@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { collection, getFirestore, getDocs, Firestore, collectionData, doc, docData, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-
+import { Component } from '@angular/core';
+//import { collection, Firestore, collectionData, doc, docData, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
+//import { AngularFirestore } from '@angular/fire/compat/firestore';
+// import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-test',
@@ -10,23 +10,65 @@ import { Observable } from 'rxjs';
 })
 export class TestComponent {
 
-  item$: Observable<any>;
-  firestore: Firestore = inject(Firestore);
+  // item$: Observable<any>;
 
-  constructor() {
+  
+
+  // constructor(private firestore: AngularFirestore) {
+  //   this.firestore.collection('test').add({name: 'Sara'})
+  //     .then((docRef) => {
+  //       console.log('Document created with ID:', docRef.id);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error creating document:', error);
+  //     });
+  // }
+
+   
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { Component, inject } from '@angular/core';
+//import { collection, getFirestore, getDocs, Firestore, collectionData, doc, docData, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
+// import { collection, Firestore, collectionData, doc, docData, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
+// import { Observable } from 'rxjs';
+
+// @Component({
+//   selector: 'app-test',
+//   templateUrl: './test.component.html',
+//   styleUrls: ['./test.component.css']
+// })
+// export class TestComponent {
+
+//   item$: Observable<any>;
+  // firestore: Firestore = inject(Firestore);
+
+  // constructor(private firestore: Firestore) {
+
     // -------------------------------GET the entire colection----------------------
     // const collectionRef = collection(this.firestore, 'test');
     // this.item$ = collectionData(collectionRef);
     // this.item$.subscribe({
     //   next: (data) => {console.log(data)}
     // })
-
+    
     // ------------------------------GET a single document-----------------------------------------------
-    const documentRef = doc(this.firestore, 'test', '3qZ61lBEnOMsk0l65EZe');
-    this.item$ = docData(documentRef);
-    this.item$.subscribe({
-      next: (data) => { console.log(data) }
-    })
+    // const documentRef = doc(this.firestore, 'test', '3qZ61lBEnOMsk0l65EZe');
+    // this.item$ = docData(documentRef);
+    // this.item$.subscribe({
+    //   next: (data) => { console.log(data) }
+    // })
 
     // ---------------------------- POST request using observables(the other CRUT operation should work the same)--------------------------------------------
     // const dataToBeAdded = { name: 'Ivan' };
@@ -124,6 +166,6 @@ export class TestComponent {
     //     console.error('Error deleting document:', error);
     //   },
     // });
-  }
-}
+//   }
+// }
 
