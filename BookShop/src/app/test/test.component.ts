@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 //import { collection, Firestore, collectionData, doc, docData, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
-//import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 // import { Observable } from 'rxjs';
 
 @Component({
