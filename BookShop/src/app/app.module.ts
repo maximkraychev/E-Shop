@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
+import { CoreModule } from './core/core.module'
+import { TestComponent } from './test/test.component';
 // import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 // import { provideAuth,getAuth } from '@angular/fire/auth';
 // import { provideDatabase,getDatabase } from '@angular/fire/database';
@@ -14,12 +16,14 @@ import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    CoreModule
     // provideFirebaseApp(() => initializeApp(environment.firebase)),
     // provideAuth(() => getAuth()),
     // provideDatabase(() => getDatabase()),

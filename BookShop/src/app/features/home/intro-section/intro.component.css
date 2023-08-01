@@ -1,0 +1,24 @@
+
+.intro-bg {
+    background-image: url('/assets/intro-picture.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 15%;
+    padding-bottom: 15%;
+    opacity: 0.9;
+  }
+
+.overlay-box {
+    background-color: rgba(71, 69, 69, 0.7); /* Adjust the color and transparency here */
+    padding: 20px; /* Adjust the padding as needed */
+    border-radius: 10px; /* Add rounded corners to the box */
+  }
+
+  .open-sans{
+    font-family: 'Open Sans', sans-serif;   
+}
+.italic{
+    font-family: 'Open Sans', sans-serif; 
+    font-style: italic  
+}
