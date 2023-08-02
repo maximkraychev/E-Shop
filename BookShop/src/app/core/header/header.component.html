@@ -25,27 +25,36 @@
 
       <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
           <ul class="navbar-nav">
-              <li class="nav-item">
-                  <a href="" class="nav-link open-sans">Catalog</a>
-              </li>
-              <li class="nav-item">
-                  <a href="" class="nav-link open-sans"> <i class="fa-solid fa-user px-1"></i> Profile</a>
-              </li>
-              <li class="nav-item">
-                  <a routerLink="/auth/register" class="nav-link open-sans">Regiser</a>
-              </li>
-              <li class="nav-item">
-                  <a routerLink="/auth/login" class="nav-link open-sans">Login</a>
-              </li>
-              <li class="nav-item">
-                  <a href="" class="nav-link open-sans">Logout</a>
-              </li>
-              <li class="nav-item">
-                  <a href="" class="nav-link open-sans"><i class="fa-solid fa-cart-shopping px-1"></i>My card</a>
-              </li>
-              <li class="nav-item">
-                  <a href="" class="nav-link open-sans"><i class="fa-solid fa-heart px-1"></i>Wishlist</a>
-              </li>
+
+            <ng-container *ngTemplateOutlet="userState ? forUserTemplate : forGuestTemplate"></ng-container>
+
+            <ng-template #forGuestTemplate>
+                <li class="nav-item">
+                    <a href="" class="nav-link open-sans"> <i class="fa-solid fa-layer-group px-1"></i>Catalog</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/auth/register" class="nav-link open-sans"><i class="fa-solid fa-key px-1"></i>Regiser</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/auth/login" class="nav-link open-sans"> <i class="fa-solid fa-arrow-up-from-bracket px-1"></i>Login</a>
+                </li>
+            </ng-template>
+
+            <ng-template #forUserTemplate>
+                <li class="nav-item">
+                    <a href="" class="nav-link open-sans"> <i class="fa-solid fa-user px-1"></i> Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/auth/logout" class="nav-link open-sans"><i class="fa-solid fa-arrow-right-from-bracket px-1"></i>Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link open-sans"><i class="fa-solid fa-heart px-1"></i>Wishlist</a>
+                  </li>
+            </ng-template>
+            
+                <li class="nav-item">
+                    <a href="" class="nav-link open-sans"><i class="fa-solid fa-cart-shopping px-1"></i>My card</a>
+                </li>
           </ul>
       </div>
   </div>
