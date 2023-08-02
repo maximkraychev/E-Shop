@@ -35,13 +35,6 @@ header>a {
     color: rgb(255, 0, 0, 0.5) !important;
 }
 
-.hidden {
-    /* opacity: 0; */
-    /* transition: opacity 1s ease; */
-    padding: 5px;
-    /* visibility: hidden; */
-}
-
 .hidden>a {
     margin-right: 10px;
     color: black;
@@ -51,16 +44,51 @@ header>a {
     color: rgb(255, 0, 0, 0.5);
 }
 
-.anchor-card:hover .hidden {
-    display: block !important;
-    /* opacity: 1; */
-    /* visibility: visible; */
+@media (min-width: 576px) {
+    .hidden {
+        padding: 5px;
+    }
 }
 
-.open-sans{
-    font-family: 'Open Sans', sans-serif;   
+@media (min-width: 768px) {
+    .hidden {
+        padding: 5px;
+    }
 }
-.italic{
-    font-family: 'Open Sans', sans-serif; 
-    font-style: italic  
+
+@media (min-width: 992px) {
+    .hidden {
+        padding: 5px;
+        transform: translateY(20px);
+        transition: 0.4s;
+        opacity: 0;
+    }
+
+    .anchor-card:hover .hidden {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+ }
+
+
+.open-sans {
+    font-family: 'Open Sans', sans-serif;
 }
+
+.italic {
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic
+}
+
+
+/* .hidden {
+    padding: 5px;
+    transform: translateY(20px);
+    transition: 0.4s;
+    opacity: 0;
+}
+
+.anchor-card:hover .hidden {
+    transform: translateY(0px);
+    opacity: 1;
+} */
