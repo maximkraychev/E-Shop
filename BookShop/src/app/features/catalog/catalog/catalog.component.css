@@ -1,0 +1,19 @@
+.icon-hover:hover {
+    border-color: #3b71ca !important;
+    background-color: white !important;
+  }
+  
+  .icon-hover:hover i {
+    color: #3b71ca !important;
+  }
+
+ 
+  #collapseFour label {
+    border: solid #4b4d50 1px;
+  }
+
+  #collapseFour input:checked + label {
+    background-color: #4b4d50; /* Set your desired background color here */
+    color: #fff; /* Set the text color to make it visible */
+  }
+  
