@@ -5,7 +5,7 @@ export interface IUser {
     surname: string;
     email: string;
     city: string;
-    addres: string;
+    deliveryAddres: string;
     postcode: number;
     phoneNumber: string;
     authId: string;
