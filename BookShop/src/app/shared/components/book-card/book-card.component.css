@@ -1,0 +1,41 @@
+.icon-hover:hover {
+    border-color: black !important;
+    background-color: white !important;
+}
+
+.icon-hover:hover i {
+    color: rgb(255, 0, 0, 0.5) !important;
+}
+
+
+.btn:hover {
+    color: rgb(255, 0, 0, 0.5);
+    border-color: black;
+}
+
+.card-link {
+    text-decoration: none;
+    color: black;
+    font-size: small
+}
+
+.card-link:hover {
+    color: rgb(255, 0, 0, 0.5);
+}
+
+.open-sans{
+    font-family: 'Open Sans', sans-serif;   
+}
+.italic{
+    font-family: 'Open Sans', sans-serif; 
+    font-style: italic  
+}
+
+.card-title {
+    word-break: break-word;
+    height: 45px;
+    max-height: 45px;
+    overflow: hidden;
+    line-height: 21px;
+    margin: 0px 0px 4px 0px;
+}

@@ -1,0 +1,21 @@
+<!-- <div class="col-lg-3 col-md-6 col-sm-6 d-flex my-1"> -->
+    <a href="/details" class="card-link">
+    <div class="card w-100 h-100 my-2 shadow-2-strong">
+      <div class="book-img d-flex justify-content-center align-items-center py-4">
+        <img src="{{book.img}}" class="card-img-top w-75 h-75" style="object-fit: contain;" />
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title open-sans">{{book.title}}</h5>
+        <a href="/author" class="card-link italic">{{book.author}}</a>
+        <div class="d-flex flex-row">
+          <h5 class="mb-1 me-1">${{book.price}}</h5>
+          <span class="text-danger" *ngIf="book.discountPrice"><s>$49.99</s></span>
+        </div>
+        <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
+          <a href="#!" class="btn btn-light border px-2 pt-2 icon-hover open-sans"><i class="fa-solid fa-cart-shopping px-1"></i>Add to cart</a>
+          <a href="#!" class="btn btn-light border px-2 pt-2 icon-hover"><i class="fas fa-heart fa-lg text-dark px-1"></i></a>
+        </div>
+      </div>
+    </div>
+    </a>
+  <!-- </div> -->
