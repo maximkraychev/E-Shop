@@ -9,6 +9,7 @@ import { BestSellingBooksComponent } from './best-selling-books/best-selling-boo
 import { NewBooksSectionComponent } from './new-books-section/new-books-section.component';
 import { WhyChooseUsSectionComponent } from './why-choose-us-section/why-choose-us-section.component';
 import { BlogPostsSectionComponent } from './blog-posts-section/blog-posts-section.component';
+import { FeaturesModule } from '../features.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { BlogPostsSectionComponent } from './blog-posts-section/blog-posts-secti
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    FeaturesModule
   ]
 })
 export class HomeModule { }
