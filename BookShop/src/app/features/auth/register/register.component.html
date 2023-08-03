@@ -22,35 +22,22 @@
                             Last Name must be at least 3 characters long.
                         </p>
                     </ng-container>
-
+                    <!-- Name -->
                     <div class="col-6">
                         <div class="form-outline">
-                            <input type="text" id="firstName" name="firstName" class="form-control" ngModel
+                            <input type="text" id="name" name="name" class="form-control" ngModel
                                 #firstName="ngModel" required minlength="3" />
-                            <label class="form-label" for="firstName">First name</label>
+                            <label class="form-label px-2" for="name">Name</label>
                         </div>
                     </div>
+                    <!-- Sirname -->
                     <div class="col-6">
                         <div class="form-outline">
-                            <input type="text" id="lastName" name="lastName" class="form-control" ngModel
+                            <input type="text" id="surname" name="surname" class="form-control" ngModel
                                 #lastName="ngModel" required minlength="3" />
-                            <label class="form-label" for="lastName">Last name</label>
+                            <label class="form-label px-2" for="surname">Surname</label>
                         </div>
                     </div>
-                </div>
-
-                <!-- Delivery address input -->
-                <div class="form-outline mb-4">
-                    <input type="text" id="deliveryAddres" name="deliveryAddres" class="form-control" ngModel
-                        #deliveryAddres="ngModel" />
-                    <label class="form-label" for="deliveryAddres">Delivery address (optional)</label>
-                </div>
-
-                <!-- Phone number input -->
-                <div class="form-outline mb-4">
-                    <input type="number" id="phoneNumber" name="phoneNumber" class="form-control" ngModel
-                        #phoneNumber="ngModel" />
-                    <label class="form-label" for="phoneNumber">Phone number: (optional)</label>
                 </div>
 
                 <!-- Email input -->
@@ -67,21 +54,49 @@
 
                     <input type="email" id="email" name="email" class="form-control" ngModel #email="ngModel" required
                         email />
-                    <label class="form-label" for="email">Email address</label>
+                    <label class="form-label px-2" for="email">Email address</label>
+                </div>
+
+                <!-- City -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="city" name="city" class="form-control" ngModel
+                        #deliveryAddres="ngModel" />
+                    <label class="form-label px-2" for="city">City</label>
+                </div>
+
+                <!-- Delivery address input -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="deliveryAddres" name="deliveryAddres" class="form-control" ngModel
+                        #deliveryAddres="ngModel" />
+                    <label class="form-label px-2" for="deliveryAddres">Delivery address</label>
+                </div>
+
+                <!-- Postcode -->
+                <div class="form-outline mb-4">
+                    <input type="number" id="postcode" name="postcode" class="form-control" ngModel
+                        #deliveryAddres="ngModel" />
+                    <label class="form-label px-2" for="postcode">Postcode</label>
+                </div>
+
+                <!-- Phone number input -->
+                <div class="form-outline mb-4">
+                    <input type="number" id="phoneNumber" name="phoneNumber" class="form-control" ngModel
+                        #phoneNumber="ngModel" />
+                    <label class="form-label px-2" for="phoneNumber">Phone number</label>
                 </div>
 
                 <!-- Password input -->
                 <div class="form-outline mb-4">
                     <input type="password" id="password" name="password" class="form-control" ngModel
                         #password="ngModel" required />
-                    <label class="form-label" for="password">Password</label>
+                    <label class="form-label px-2" for="password">Password</label>
                 </div>
 
                 <!-- Re-password input -->
                 <div class="form-outline mb-4">
                     <input type="password" id="rePassword" name="rePassword" class="form-control" ngModel
                         #rePassword="ngModel" required />
-                    <label class="form-label" for="rePassword">Repeat Password</label>
+                    <label class="form-label px-2" for="rePassword">Repeat Password</label>
                 </div>
 
                 <!-- Submit button -->
