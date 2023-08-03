@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CatalogRoutingModule } from './catalog-routing.module';
+import { FeaturesModule } from '../features.module';
 
 
 
@@ -11,7 +12,8 @@ import { CatalogRoutingModule } from './catalog-routing.module';
   ],
   imports: [
     CommonModule,
-    CatalogRoutingModule
+    CatalogRoutingModule,
+    FeaturesModule
   ]
 })
 export class CatalogModule { }
