@@ -41,14 +41,14 @@
 
                 <!-- Delivery address input -->
                 <div class="form-outline mb-4">
-                    <input type="email" id="deliveryAddres" name="deliveryAddres" class="form-control" ngModel
+                    <input type="text" id="deliveryAddres" name="deliveryAddres" class="form-control" ngModel
                         #deliveryAddres="ngModel" />
                     <label class="form-label" for="deliveryAddres">Delivery address (optional)</label>
                 </div>
 
                 <!-- Phone number input -->
                 <div class="form-outline mb-4">
-                    <input type="email" id="phoneNumber" name="phoneNumber" class="form-control" ngModel
+                    <input type="number" id="phoneNumber" name="phoneNumber" class="form-control" ngModel
                         #phoneNumber="ngModel" />
                     <label class="form-label" for="phoneNumber">Phone number: (optional)</label>
                 </div>
@@ -84,16 +84,10 @@
                     <label class="form-label" for="rePassword">Repeat Password</label>
                 </div>
 
-                <!-- Checkbox -->
-                <div class="form-check d-flex justify-content-center mb-4">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
-                    <label class="form-check-label" for="form2Example33">
-                        Subscribe to our newsletter
-                    </label>
-                </div>
-
                 <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+                <div class="d-flex justify-content-center align-items-center">
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+                </div>
             </form>
         </div>
     </div>
