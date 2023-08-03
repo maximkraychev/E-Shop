@@ -7,12 +7,13 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule) },
   { path: 'auth', loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) },
   { path: 'profile', loadChildren: () => import('./features/user/user.module').then(m => m.UserModule) },
-  {path: 'catalog', loadChildren: () => import('./features/catalog/catalog.module').then(m => m.CatalogModule)},
-  {path: 'test', component: TestComponent}
+  { path: 'catalog', loadChildren: () => import('./features/catalog/catalog.module').then(m => m.CatalogModule) },
+  { path: ':id/details', loadChildren: () => import('./features/details/details.module').then(m => m.DetailsModule) },
+  { path: 'test', component: TestComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
