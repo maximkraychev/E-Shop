@@ -17,6 +17,7 @@ export class LoginComponent {
   loginHandler() {
     const fields = this.form.value;
     this.authService.signIn(fields.email, fields.password)
+      .then((data) => console.log(data))
       .finally(() => {this.router.navigate(['/home'])})
       .catch((err) => {
         //TODO handle the error;
