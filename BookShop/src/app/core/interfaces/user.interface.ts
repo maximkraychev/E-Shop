@@ -1,5 +1,3 @@
-import { IBook } from "./book.interface";
-
 export interface IUser {
     name: string;
     surname: string;
@@ -7,7 +5,8 @@ export interface IUser {
     city: string;
     deliveryAddres: string;
     postcode: number;
-    phoneNumber: string;
+    phoneNumber: number;
     authId: string;
-    wishlist: IBook[] | [];
+    wishlist: string[] | [];
+    role: string;
 }
