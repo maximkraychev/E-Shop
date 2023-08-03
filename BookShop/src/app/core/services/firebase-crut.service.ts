@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference } from '@angular/fire/compat/firestore'
 import { Observable } from 'rxjs';
+import { IUser } from '../interfaces/user.interface';
 
 interface IBook {
   title: string,
@@ -19,12 +20,17 @@ export class FirebaseCRUTService {
 
   //TODO check and change the types for all requests;
 
-  addBook(book: IBook): Promise<DocumentReference<IBook>> {
-    return this.afs.collection<IBook>('books').add(book);
+  add<T>(document: T, collectionName: string): Promise<DocumentReference<T>> {
+    return this.afs.collection<T>(collectionName).add(document);
+  }
+
+  addWithCustomId(document: IUser, collectionName: string, id: string): Promise<void> {
+    return this.afs.collection(collectionName).doc(id).set(document);
+      //.then(() => ({ id, ...document })); // Return the document ID along with the data
   }
 
   // Read operation - get all documents in a collection
-  getAllBooks(): Observable<any[]> {
+  getAll(): Observable<any[]> {
     return this.afs.collection('books').valueChanges();
   }
 
