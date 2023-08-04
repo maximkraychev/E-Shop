@@ -46,9 +46,8 @@ export class RegisterComponent {
           }
 
           await this.usersService.addUserWithId(userData, userCredential.user.uid);
-        
-          console.log('User signed up:', userCredential.user);
           this.router.navigate(['/home']);
+          
         } else {
           throw new Error('We didin\'t find uid!');
         }
