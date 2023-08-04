@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Subscription } from 'rxjs';
+import { UserStateService } from '../services/user-state.service';
 
 @Component({
   selector: 'app-header',
@@ -12,10 +13,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userState!: boolean;
   private userStateSubscription!: Subscription;
 
-  constructor(private afAuth: AngularFireAuth) {}
+  constructor(private userStateServbice: UserStateService) {}
 
   ngOnInit(): void {
-    this.userStateSubscription = this.afAuth.authState.subscribe({
+    this.userStateSubscription = this.userStateServbice.user$.subscribe({
       next: (user) => {
         this.userState = !!user;
       },
