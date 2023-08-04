@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Subscription } from 'rxjs';
 import { UserStateService } from '../services/user-state.service';
+import firebase from 'firebase/compat/app';
 
 @Component({
   selector: 'app-header',
@@ -10,24 +10,34 @@ import { UserStateService } from '../services/user-state.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  userState!: boolean;
+  userState!: firebase.User | null;
   private userStateSubscription!: Subscription;
 
-  constructor(private userStateServbice: UserStateService) {}
+  constructor(public userStateServbice: UserStateService) {
+
+    // if (sessionStorage.getItem('user-state')) {
+    //   this.userState = JSON.parse(sessionStorage.getItem('user-state') || '') as firebase.User | null;
+    // } else {
+    //   this.userState = null;
+    // }
+  }
 
   ngOnInit(): void {
+    console.log(this.userState);
+
     this.userStateSubscription = this.userStateServbice.user$.subscribe({
       next: (user) => {
-        this.userState = !!user;
+        this.userState = user;
       },
       error: (error) => {
         console.error(error);
-        this.userState = false;
+        this.userState = null;
       }
     })
   }
 
   ngOnDestroy(): void {
     this.userStateSubscription.unsubscribe();
+    sessionStorage.removeItem('user-state');
   }
 }

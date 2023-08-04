@@ -34,14 +34,14 @@
                 <a href="" class="nav-link open-sans"><i class="fa-solid fa-cart-shopping px-1"></i>My card</a>
               </li>
 
-            <ng-container *ngTemplateOutlet="userState ? forUserTemplate : forGuestTemplate"></ng-container>
+            <ng-container *ngTemplateOutlet=" userState ? forUserTemplate : forGuestTemplate"></ng-container>
 
             <ng-template #forGuestTemplate>
                 <li class="nav-item">
-                    <a routerLink="/auth/login" class="nav-link open-sans"><i class="fa-solid fa-arrow-right-from-bracket px-1"></i>Login</a>
+                    <a routerLink="/user/login" class="nav-link open-sans"><i class="fa-solid fa-arrow-right-from-bracket px-1"></i>Login</a>
                 </li>
                 <li class="nav-item">
-                    <a routerLink="/auth/register" class="nav-link open-sans"><i class="fa-solid fa-key px-1"></i>Regiser</a>
+                    <a routerLink="/user/register" class="nav-link open-sans"><i class="fa-solid fa-key px-1"></i>Regiser</a>
                 </li>
             </ng-template>
 
@@ -50,10 +50,10 @@
                     <a href="" class="nav-link open-sans"><i class="fa-solid fa-heart px-1"></i>Wishlist</a>
                   </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link open-sans"> <i class="fa-solid fa-user px-1"></i> Profile</a>
+                    <a routerLink="/user/profile" class="nav-link open-sans"> <i class="fa-solid fa-user px-1"></i> Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a routerLink="/auth/logout" class="nav-link open-sans"><i class="fa-solid fa-arrow-up-from-bracket px-1"></i>Logout</a>
+                    <a routerLink="/user/logout" class="nav-link open-sans"><i class="fa-solid fa-arrow-up-from-bracket px-1"></i>Logout</a>
                 </li>
             </ng-template>
             
