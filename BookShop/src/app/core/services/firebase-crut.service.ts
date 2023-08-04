@@ -24,9 +24,8 @@ export class FirebaseCRUTService {
     return this.afs.collection<T>(collectionName).add(document);
   }
 
-  addWithCustomId(document: IUser, collectionName: string, id: string): Promise<void> {
+  addDataWithId(document: IUser, collectionName:string, id: string): Promise<void> {
     return this.afs.collection(collectionName).doc(id).set(document);
-      //.then(() => ({ id, ...document })); // Return the document ID along with the data
   }
 
   // Read operation - get all documents in a collection
