@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable } from 'rxjs';
-import { UserInfo } from 'firebase/auth';
+import { BehaviorSubject, Observable } from 'rxjs';
+//import { User } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserStateService {
 
-  //TODO not used for now, delete later if there is no subs;
-  user$: Observable<UserInfo | null>;
+  // Using unknown type because returned firebase.User from authState is not the same as our User from firebase/auth;
+
+  private userBehaviorSubject$$ = new BehaviorSubject<unknown | null>(null);
+  user$: Observable<unknown | null> = this.userBehaviorSubject$$.asObservable();
 
   constructor(private afAuth: AngularFireAuth) { 
-    // Set up the user$ observable using authState;
-    this.user$ = this.afAuth.authState;
+
+    this.afAuth.authState.subscribe({
+      next: (user) => this.userBehaviorSubject$$.next(user),
+      error: (err) => this.userBehaviorSubject$$.error(err)
+    })
   }
 }
