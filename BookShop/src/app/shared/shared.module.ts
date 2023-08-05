@@ -4,13 +4,15 @@ import { BookCardComponent } from './components/book-card/book-card.component';
 import { TrimDirective } from './directives/trim-directive';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { PasswordMatchDirective } from './directives/password-match-validator.directive';
 
 
 
 @NgModule({
   declarations: [
     BookCardComponent,
-    TrimDirective
+    TrimDirective,
+    PasswordMatchDirective
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     RouterModule,
     BookCardComponent,
-    TrimDirective
+    TrimDirective,
+    PasswordMatchDirective
   ]
 })
 export class SharedModule { }
