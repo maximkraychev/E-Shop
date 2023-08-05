@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, ReplaySubject} from 'rxjs';
 import firebase from 'firebase/compat/app';
 
 @Injectable({
@@ -8,29 +8,20 @@ import firebase from 'firebase/compat/app';
 })
 export class UserStateService {
 
-  private userBehaviorSubject$$ = new BehaviorSubject<firebase.User | null>(null);
-  user$: Observable<firebase.User | null> = this.userBehaviorSubject$$.asObservable();
-
-  // private userLoaderBehaviorSubject$$ = new BehaviorSubject<boolean>(true);
-  // userLoaderObserver$: Observable<boolean> = this.userLoaderBehaviorSubject$$.asObservable();
-
+  // Its not working with BehaviorSubject because of the initial value;
+  private userSubject$$ = new ReplaySubject<firebase.User | null>(1);
+  user$: Observable<firebase.User | null> = this.userSubject$$.asObservable();
 
   constructor(private afAuth: AngularFireAuth) {
-
     this.afAuth.authState.subscribe({
       next: (user) => {
-        console.log(user, 'statetetetette');
-
-        // if (user) {
-        //   sessionStorage.setItem('user-state', JSON.stringify(user));
-        // } else {
-        //   sessionStorage.removeItem('user-state');
-        // }
-       
-        this.userBehaviorSubject$$.next(user);
-        // this.userLoaderBehaviorSubject$$.next(false);
+        this.userSubject$$.next(user);
       },
-      error: (err) => this.userBehaviorSubject$$.error(err)
-    })
+      error: (err) => {
+        alert('Authentication Error: Unable to retrieve user information. Please try again later.');
+        console.error(err);
+        this.userSubject$$.error(null);
+      }
+    });
   }
 }
