@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CatalogRoutingModule } from './catalog-routing.module';
-import { FeaturesModule } from '../features.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -11,9 +10,8 @@ import { FeaturesModule } from '../features.module';
     CatalogComponent
   ],
   imports: [
-    CommonModule,
     CatalogRoutingModule,
-    FeaturesModule
+    SharedModule
   ]
 })
 export class CatalogModule { }
