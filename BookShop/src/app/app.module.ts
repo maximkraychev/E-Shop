@@ -5,8 +5,7 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module'
-import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 import { ErrorComponentComponent } from './core/error-component/error-component.component';
 
 @NgModule({
@@ -18,8 +17,7 @@ import { ErrorComponentComponent } from './core/error-component/error-component.
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    CoreModule,
-    SharedModule
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
