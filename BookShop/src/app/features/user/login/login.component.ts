@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { ErrorPopupService } from 'src/app/core/services/error-popup.service';
 
 @Component({
   selector: 'app-login',
@@ -10,18 +11,16 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  @ViewChild('form') form!: NgForm;
+  @ViewChild('loginForm') form!: NgForm;
 
-  constructor(private authService: AuthService,private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private errorService: ErrorPopupService) { }
 
   loginHandler() {
     const fields = this.form.value;
     this.authService.signIn(fields.email, fields.password)
-      .then((data) => console.log(data))
-      .finally(() => {this.router.navigate(['/home'])})
+      .then(() => {this.router.navigate(['/home'])})
       .catch((err) => {
-        //TODO handle the error;
-        alert(err) 
+        this.errorService.pushErrorMsg(err.message);
       });
   }
 }
