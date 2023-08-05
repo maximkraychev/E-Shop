@@ -1,0 +1,37 @@
+import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { ErrorPopupService } from '../services/error-popup.service';
+import { Subscription } from 'rxjs';
+
+
+@Component({
+  selector: 'app-error-component',
+  templateUrl: './error-component.component.html',
+  styleUrls: ['./error-component.component.css']
+})
+export class ErrorComponentComponent implements OnDestroy{
+ 
+  @ViewChild('activateButton') activateModal!: ElementRef<HTMLDivElement>;
+  errorText: string = '';
+  private errorSubscription: Subscription;
+
+  constructor(private errorService: ErrorPopupService) {
+    this.errorSubscription = this.errorService.errorMsg$.subscribe({
+      next: (errorMsg) => {
+        this.errorText = errorMsg;
+        this.activate();
+      }, 
+      error: (err) => {
+        this.errorText = err.message;
+        this.activate();
+      }
+    })
+  }
+
+  activate() {
+    this.activateModal.nativeElement.click();
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
+  }
+}
