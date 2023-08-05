@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
+import { SharedModule } from 'src/app/shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { IntroComponent } from './intro-section/intro.component';
@@ -9,7 +9,6 @@ import { BestSellingBooksComponent } from './best-selling-books/best-selling-boo
 import { NewBooksSectionComponent } from './new-books-section/new-books-section.component';
 import { WhyChooseUsSectionComponent } from './why-choose-us-section/why-choose-us-section.component';
 import { BlogPostsSectionComponent } from './blog-posts-section/blog-posts-section.component';
-import { FeaturesModule } from '../features.module';
 
 
 @NgModule({
@@ -23,9 +22,8 @@ import { FeaturesModule } from '../features.module';
     BlogPostsSectionComponent
   ],
   imports: [
-    CommonModule,
-    HomeRoutingModule,
-    FeaturesModule
+    SharedModule,
+    HomeRoutingModule
   ]
 })
 export class HomeModule { }
