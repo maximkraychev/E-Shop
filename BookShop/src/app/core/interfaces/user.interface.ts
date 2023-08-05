@@ -4,8 +4,8 @@ export interface IUser {
     email: string;
     city: string;
     deliveryAddres: string;
-    postcode: number;
-    phoneNumber: number;
+    postcode: string;
+    phoneNumber: string;
     authId: string;
     wishlist: string[] | [];
     role: string;

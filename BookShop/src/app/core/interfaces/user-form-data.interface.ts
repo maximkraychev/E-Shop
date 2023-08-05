@@ -3,8 +3,8 @@ export interface IUserFormData {
     deliveryAddres: string;
     email: string;
     name: string;
-    phoneNumber: number;
-    postcode: number;
+    phoneNumber: string;
+    postcode: string;
     surname: string;
     password: string;
 }
