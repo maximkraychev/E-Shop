@@ -8,23 +8,12 @@ import firebase from 'firebase/compat/app';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnDestroy {
 
   userState!: firebase.User | null;
   private userStateSubscription!: Subscription;
 
   constructor(public userStateServbice: UserStateService) {
-
-    // if (sessionStorage.getItem('user-state')) {
-    //   this.userState = JSON.parse(sessionStorage.getItem('user-state') || '') as firebase.User | null;
-    // } else {
-    //   this.userState = null;
-    // }
-  }
-
-  ngOnInit(): void {
-    console.log(this.userState);
-
     this.userStateSubscription = this.userStateServbice.user$.subscribe({
       next: (user) => {
         this.userState = user;
@@ -34,6 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.userState = null;
       }
     })
+    
   }
 
   ngOnDestroy(): void {
