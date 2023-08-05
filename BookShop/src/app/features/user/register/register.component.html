@@ -1,9 +1,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-            <form #form="ngForm" (ngSubmit)="registerHandler()">
-                <!-- 2 column grid layout with text inputs for the first and last names -->
+            <form #registerForm="ngForm" (ngSubmit)="registerHandler()">
+
                 <h2>Register</h2>
+
+                 <!-- Name and Sirname -->
                 <div class="row mb-4">
 
                     <ng-container *ngIf="firstName.touched">
@@ -13,6 +15,9 @@
                         <p class="error" *ngIf="firstName?.errors?.['minlength']">
                             First Name must be at least 3 characters long.
                         </p>
+                        <p class="error" *ngIf="city?.errors?.['maxlength']">
+                            First Name cannot exceed 20 characters.
+                        </p>
                     </ng-container>
                     <ng-container *ngIf="lastName.touched">
                         <p class="error" *ngIf="lastName?.errors?.['required']">
@@ -21,87 +26,210 @@
                         <p class="error" *ngIf="lastName?.errors?.['minlength']">
                             Last Name must be at least 3 characters long.
                         </p>
+                        <p class="error" *ngIf="city?.errors?.['maxlength']">
+                            Sirname name cannot exceed 20 characters.
+                        </p>
                     </ng-container>
+
                     <!-- Name -->
                     <div class="col-6">
                         <div class="form-outline">
-                            <input type="text" id="name" name="name" class="form-control" ngModel
-                                #firstName="ngModel" required minlength="3" />
+                            <input type="text" id="name" name="name" class="form-control" 
+                                ngModel
+                                #firstName="ngModel" 
+                                required 
+                                minlength="3"
+                                maxlength="20"
+                            />
                             <label class="form-label px-2" for="name">Name</label>
                         </div>
                     </div>
+
                     <!-- Sirname -->
                     <div class="col-6">
                         <div class="form-outline">
-                            <input type="text" id="surname" name="surname" class="form-control" ngModel
-                                #lastName="ngModel" required minlength="3" />
+                            <input type="text" id="surname" name="surname" class="form-control" 
+                                ngModel
+                                #lastName="ngModel"
+                                required 
+                                minlength="3" 
+                                maxlength="20"
+                            />
                             <label class="form-label px-2" for="surname">Surname</label>
                         </div>
                     </div>
+
                 </div>
 
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                     <ng-container *ngIf="email.touched">
                         <p class="error" *ngIf="email?.errors?.['required']">
-                            Email is
-                            requiredssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss.
+                            Email is required.
                         </p>
-                        <p class="error" *ngIf="email?.errors?.['email']">
-                            Email must be a valid email address.
+                        <p class="error" *ngIf="email?.errors?.['pattern']">
+                            Email must be a valid email.
                         </p>
                     </ng-container>
 
-                    <input type="email" id="email" name="email" class="form-control" ngModel #email="ngModel" required
-                        email />
+                    <input type="email" id="email" name="email" class="form-control" 
+                        ngModel 
+                        #email="ngModel" 
+                        required 
+                        pattern="^[\w]+@[\w]+\.[\w]+$"
+                    />
                     <label class="form-label px-2" for="email">Email address</label>
                 </div>
 
+
                   <!-- Phone number input -->
-                  <div class="form-outline mb-4">
-                    <input type="number" id="phoneNumber" name="phoneNumber" class="form-control" ngModel
-                        #phoneNumber="ngModel" />
+                <div class="form-outline mb-4">
+
+                    <ng-container *ngIf="phoneNumber.touched">
+                        <p class="error" *ngIf="phoneNumber?.errors?.['required']">
+                            Phone number is required.
+                        </p>
+                        <p class="error" *ngIf="phoneNumber?.errors?.['minlength']">
+                            Phone number must be at least 8 characters long.
+                        </p>
+                        <p class="error" *ngIf="city?.errors?.['maxlength']">
+                            Phone number cannot exceed 20 characters.
+                        </p>
+                    </ng-container>
+
+                    <input type="string" id="phoneNumber" name="phoneNumber" class="form-control" 
+                        ngModel
+                        #phoneNumber="ngModel" 
+                        required
+                        minlength="8"
+                        maxlength="20"
+                    />
                     <label class="form-label px-2" for="phoneNumber">Phone number</label>
                 </div>
 
                 <!-- City -->
                 <div class="form-outline mb-4">
-                    <input type="text" id="city" name="city" class="form-control" ngModel
-                        #deliveryAddres="ngModel" />
+
+                    <ng-container *ngIf="city.touched">
+                        <p class="error" *ngIf="city?.errors?.['required']">
+                            City name is required.
+                        </p>
+                        <p class="error" *ngIf="city?.errors?.['minlength']">
+                            City name must be at least 3 characters long.
+                        </p>
+                        <p class="error" *ngIf="city?.errors?.['maxlength']">
+                            City name cannot exceed 20 characters.
+                        </p>
+                    </ng-container>
+
+                    <input type="text" id="city" name="city" class="form-control" 
+                        ngModel
+                        #city="ngModel"
+                        required
+                        minlength="3"
+                        maxlength="20"
+                    />
                     <label class="form-label px-2" for="city">City</label>
                 </div>
 
                 <!-- Delivery address input -->
                 <div class="form-outline mb-4">
-                    <input type="text" id="deliveryAddres" name="deliveryAddres" class="form-control" ngModel
-                        #deliveryAddres="ngModel" />
+
+                    <ng-container *ngIf="deliveryAddres.touched">
+                        <p class="error" *ngIf="deliveryAddres?.errors?.['required']">
+                            Delivery addres is required.
+                        </p>
+                        <p class="error" *ngIf="deliveryAddres?.errors?.['minlength']">
+                            Delivery addres must be at least 5 characters long.
+                        </p>
+                        <p class="error" *ngIf="deliveryAddres?.errors?.['maxlength']">
+                            Delivery addres cannot exceed 50 characters.
+                        </p>
+                    </ng-container>
+
+                    <input type="text" id="deliveryAddres" name="deliveryAddres" class="form-control" 
+                        ngModel
+                        #deliveryAddres="ngModel" 
+                        required
+                        minlength="5"
+                        maxlength="50"
+                    />
                     <label class="form-label px-2" for="deliveryAddres">Delivery address</label>
                 </div>
 
                 <!-- Postcode -->
                 <div class="form-outline mb-4">
-                    <input type="number" id="postcode" name="postcode" class="form-control" ngModel
-                        #deliveryAddres="ngModel" />
+
+                    <ng-container *ngIf="postcode.touched">
+                        <p class="error" *ngIf="postcode?.errors?.['required']">
+                            Postcode is required.
+                        </p>
+                        <p class="error" *ngIf="postcode?.errors?.['maxlength']">
+                            Postcode cannot exceed 20 characters.
+                        </p>
+                    </ng-container>
+
+                    <input type="string" id="postcode" name="postcode" class="form-control" 
+                        ngModel
+                        #postcode="ngModel"
+                        required
+                        maxlength="20"
+                        />
                     <label class="form-label px-2" for="postcode">Postcode</label>
                 </div>
 
+            <div ngModelGroup="passwordGroup" #passwordGroup="ngModelGroup">
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <input type="password" id="password" name="password" class="form-control" ngModel
-                        #password="ngModel" required />
+
+                    <ng-container *ngIf="password.touched">
+                        <p class="error" *ngIf="password?.errors?.['required']">
+                            Password is required.
+                        </p>
+                        <p class="error" *ngIf="password?.errors?.['minlength']">
+                            Password must be at least 6 characters long.
+                        </p>
+                        <p class="error" *ngIf="password?.errors?.['maxlength']">
+                            Password cannot exceed 20 characters.
+                        </p>
+                    </ng-container>
+
+                    <input type="password" id="password" name="password" class="form-control" 
+                        ngModel
+                        #password="ngModel" 
+                        required 
+                        minlength="6"
+                        maxlength="20"
+                    />
                     <label class="form-label px-2" for="password">Password</label>
                 </div>
 
                 <!-- Re-password input -->
                 <div class="form-outline mb-4">
-                    <input type="password" id="rePassword" name="rePassword" class="form-control" ngModel
-                        #rePassword="ngModel" required />
+
+                    <ng-container *ngIf="rePassword.touched">
+                        <p class="error" *ngIf="rePassword?.errors?.['required']">
+                            Repeat password is required.
+                        </p>
+                        <p class="error" *ngIf="rePassword?.errors?.['passwordMatch']">
+                            Repeat password does not match.
+                        </p>
+                    </ng-container>
+
+                    <input type="password" id="rePassword" name="rePassword" class="form-control" 
+                        ngModel
+                        #rePassword="ngModel" 
+                        required
+                        [passwordMatch]="passwordGroup"
+                    />
                     <label class="form-label px-2" for="rePassword">Repeat Password</label>
                 </div>
+            </div>
 
                 <!-- Submit button -->
                 <div class="d-flex justify-content-center align-items-center">
-                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+                    <button type="submit" class="btn btn-primary btn-block mb-4" 
+                    [disabled]="registerForm.invalid">Sign up</button>
                 </div>
             </form>
         </div>
