@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FirebaseUsersService } from './services/firebase-users.service';
 import { AuthService } from './services/auth.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -19,9 +20,8 @@ import { AuthService } from './services/auth.service';
     LogoutComponent
   ],
   imports: [
-    CommonModule,
     UserRoutingModule,
-    FormsModule
+    SharedModule
   ],
   providers: [
     FirebaseUsersService,
