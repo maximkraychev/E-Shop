@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, Subscription, concatMap, debounceTime, of, switchMap, take } from 'rxjs';
+import { Observable, Subscription, concatMap, debounceTime, map, of, switchMap, take } from 'rxjs';
 import { IUser } from 'src/app/core/interfaces/user.interface';
 import { UserStateService } from 'src/app/core/services/user-state.service';
 import { FirebaseUsersService } from '../services/firebase-users.service';
 import firebase from 'firebase/compat/app';
+import { ErrorPopupService } from 'src/app/core/services/error-popup.service';
 
 @Component({
   selector: 'app-profile',
@@ -22,51 +23,53 @@ export class ProfileComponent implements OnInit, OnDestroy {
   userDataSubscription!: Subscription;
 
   constructor(
-    private userStateService: UserStateService, 
+    private userStateService: UserStateService,
     private router: Router,
-    private firebaseUserService: FirebaseUsersService
-    ) { }
+    private firebaseUserService: FirebaseUsersService,
+    private errorService: ErrorPopupService
+  ) { }
 
   ngOnInit(): void {
 
+  // Getting authentication user uid;
+  // Then set up observable for user data; 
     const userData$ = this.userStateService.user$
       .pipe(
-        debounceTime(400),
-        switchMap((user):Observable<IUser | undefined> => {
-        
-        if (user != null && user.uid) {
-          this.userId = user.uid;
-          return this.firebaseUserService.getUserDataById(user.uid);
-        }else {
-          this.router.navigate(['/user/login']);
-          return of(undefined);
-        }
-      }))
+        map(x => x?.uid),
+        switchMap((uid): Observable<IUser | undefined> => {
 
-      this.userDataSubscription = userData$.subscribe({
-        next: (data) => {
-          if(data) {
-            console.log(data, '-----', 'data');
-            
-            this.userData = data;
+          if (uid) {
+            this.userId = uid;
+            return this.firebaseUserService.getUserDataById(uid);
           } else {
-            alert('There is no user data for that user!');
+            this.errorService.pushErrorMsg('We couldn\'t find such user.');
             this.router.navigate(['/user/login']);
+            return of(undefined);
           }
-        }, 
-        error: (err) => {
-          console.log(err);
-          
-          alert(err.message);
-          this.router.navigate(['/user/login']);
+
+        }))
+
+ // Subscribing for user data;     
+    this.userDataSubscription = userData$.subscribe({
+      next: (data) => {
+        if (data) {
+          this.userData = data;
+        } else {
+          this.errorService.pushErrorMsg('There is no data for that user.');
         }
-      })
+      },
+      error: (err) => {
+        console.error(err);
+        this.errorService.pushErrorMsg(err.message);
+        this.router.navigate(['/user/login']);
+      }
+    })
 
   }
 
   editProfile() {
     this.editable = !this.editable;
-    
+
   }
 
   saveProfile() {
@@ -75,7 +78,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-     this.userDataSubscription.unsubscribe();
+    this.userDataSubscription.unsubscribe();
   }
 }
 
