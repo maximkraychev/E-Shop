@@ -1,25 +1,9 @@
-<!-- <div *ngIf="(userState.user$ | async); else loading">
-    <app-header></app-header>
-    <router-outlet></router-outlet>
-    <app-footer></app-footer>
-</div>
-
-<ng-template #loading>
-    <app-main-loader></app-main-loader>
-</ng-template> -->
-
 <ng-container *ngIf="isLoading; else mainContent">
-    <app-main-loader></app-main-loader>
-  </ng-container>
-  
-  <ng-template #mainContent>
-    <app-header></app-header>
-    <router-outlet></router-outlet>
-    <app-footer></app-footer>
-  </ng-template>
-  
+  <app-main-loader></app-main-loader>
+</ng-container>
 
-
-
-
-  
+<ng-template #mainContent>
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</ng-template>
