@@ -11,6 +11,10 @@ export class ErrorPopupService {
 
   // With this method we can push err msg from other components to error component;
   pushErrorMsg(error: string) {
-    this.errorMsgSubject.next(error);
+    if(typeof error == 'string') {
+      this.errorMsgSubject.next(error);
+    } else {
+      this.errorMsgSubject.next('The recived error is not of type string');
+    }
   }
 }
