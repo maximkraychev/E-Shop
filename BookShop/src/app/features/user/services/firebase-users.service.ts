@@ -7,7 +7,9 @@ import { FirebaseCRUTService } from 'src/app/core/services/firebase-crut.service
 @Injectable()
 export class FirebaseUsersService {
 
-  constructor(private fireService: FirebaseCRUTService) { }
+  constructor(private fireService: FirebaseCRUTService<IUser>) { }
+
+  // All of the methods here are for user data in fireStore;
 
   addUserWithId(document: IUser, id: string): Promise<void> {
     return this.fireService.addDataWithId(document, COLLECTIONS.USERS, id);
@@ -15,5 +17,9 @@ export class FirebaseUsersService {
 
   getUserDataById(documentId: string): Observable<IUser | undefined> {
     return (this.fireService.getById(documentId, COLLECTIONS.USERS)) as Observable<IUser | undefined>; 
+  }
+
+  updateUserData(documentId: string, userData: IUser): Promise<void> {
+    return this.fireService.updateData(documentId, userData, COLLECTIONS.USERS);
   }
 }
