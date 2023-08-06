@@ -16,8 +16,13 @@
                         </p>
                     </ng-container>
 
-                    <input type="email" id="email" name="email" class="form-control" ngModel #email="ngModel"
-                        required pattern="^[\w]+@[\w]+\.[\w]+$"/>
+                    <input type="email" id="email" name="email" class="form-control" 
+                        ngModel 
+                        #email="ngModel"
+                        required 
+                        trim
+                        pattern="^[\w]+@[\w]+\.[\w]+$"
+                    />
                     <label class="form-label" for="email">Email address</label>
                 </div>
 
@@ -34,8 +39,13 @@
                 </ng-container>
 
                 <div class="form-outline mb-4">
-                    <input type="password" id="password" name="password" class="form-control" ngModel
-                        #password="ngModel" required minlength="6"/>
+                    <input type="password" id="password" name="password" class="form-control" 
+                        ngModel
+                        #password="ngModel" 
+                        required 
+                        trim
+                        minlength="6"
+                    />
                     <label class="form-label" for="rePassword">Password</label>
                 </div>
 

@@ -40,6 +40,7 @@
                                 required 
                                 minlength="3"
                                 maxlength="20"
+                                trim
                             />
                             <label class="form-label px-2" for="name">Name</label>
                         </div>
@@ -54,6 +55,7 @@
                                 required 
                                 minlength="3" 
                                 maxlength="20"
+                                trim
                             />
                             <label class="form-label px-2" for="surname">Surname</label>
                         </div>
@@ -77,6 +79,7 @@
                         #email="ngModel" 
                         required 
                         pattern="^[\w]+@[\w]+\.[\w]+$"
+                        trim
                     />
                     <label class="form-label px-2" for="email">Email address</label>
                 </div>
@@ -103,6 +106,7 @@
                         required
                         minlength="8"
                         maxlength="20"
+                        trim
                     />
                     <label class="form-label px-2" for="phoneNumber">Phone number</label>
                 </div>
@@ -128,6 +132,7 @@
                         required
                         minlength="3"
                         maxlength="20"
+                        trim
                     />
                     <label class="form-label px-2" for="city">City</label>
                 </div>
@@ -153,6 +158,7 @@
                         required
                         minlength="5"
                         maxlength="50"
+                        trim
                     />
                     <label class="form-label px-2" for="deliveryAddres">Delivery address</label>
                 </div>
@@ -174,6 +180,7 @@
                         #postcode="ngModel"
                         required
                         maxlength="20"
+                        trim
                         />
                     <label class="form-label px-2" for="postcode">Postcode</label>
                 </div>
@@ -200,6 +207,7 @@
                         required 
                         minlength="6"
                         maxlength="20"
+                        trim
                     />
                     <label class="form-label px-2" for="password">Password</label>
                 </div>
@@ -220,6 +228,7 @@
                         ngModel
                         #rePassword="ngModel" 
                         required
+                        trim
                         [passwordMatch]="passwordGroup"
                     />
                     <label class="form-label px-2" for="rePassword">Repeat Password</label>
