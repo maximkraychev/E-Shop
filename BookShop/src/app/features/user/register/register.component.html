@@ -237,9 +237,16 @@
 
                 <!-- Submit button -->
                 <div class="d-flex justify-content-center align-items-center">
-                    <button type="submit" class="btn btn-primary btn-block mb-4" 
-                    [disabled]="registerForm.invalid">Sign up</button>
-                </div>
+                    <!-- <button type="submit" class="btn btn-primary btn-block mb-4" 
+                    [disabled]="registerForm.invalid">Sign up</button> -->
+                <app-load-button 
+                    type="submit" 
+                    add-class="btn btn-primary btn-block mb-4" 
+                    [loading]="btnLoad" 
+                    [is-disabled]="registerForm.invalid"
+                >Sign up</app-load-button>
+
+                </div> 
             </form>
         </div>
     </div>
