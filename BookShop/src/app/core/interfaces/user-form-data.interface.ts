@@ -6,5 +6,8 @@ export interface IUserFormData {
     phoneNumber: string;
     postcode: string;
     surname: string;
-    password: string;
+    passwordGroup: {
+        password: string;
+        rePassword: string;
+    }
 }
