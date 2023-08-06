@@ -52,9 +52,15 @@
 
                 <!-- Submit button -->
                 <div class="d-flex justify-content-center align-items-center">
-                    <button type="submit" class="btn btn-primary btn-block mb-4"
+                    <!-- <button type="submit" class="btn btn-primary btn-block mb-4"
                     [disabled]="loginForm.invalid"
-                    >Sign in</button>
+                    >Sign in</button> -->
+                    <app-load-button
+                        type="submit" 
+                        add-class="btn btn-primary btn-block mb-4"
+                        [loading]="btnLoad"
+                        [is-disabled]="loginForm.invalid"
+                    >Sign in</app-load-button>
                 </div>
 
                 <!-- Links for Regiser and Forgot password -->
