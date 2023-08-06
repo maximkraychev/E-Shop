@@ -1,14 +1,11 @@
-<ng-container *ngTemplateOutlet="editable ? Edit : Profile"></ng-container>
-
-<ng-template #Edit>
-    <form #form="ngForm" (ngSubmit)="saveProfile()">
+    <form #profileForm="ngForm" (ngSubmit)="btnClick()">
         <div class="container rounded bg-white mt-5 mb-5">
             <div class="row justify-content-center">
                 <div class="col-md-3 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                         <img class="rounded-circle mt-5" width="150px" src="/assets/user-avatar.jpg">
-                        <span class="font-weight-bold">Edogaru</span>
-                        <span class="text-black-50">edogaru@mail.com.my</span>
+                        <span class="font-weight-bold">{{userData?.name}} {{userData?.surname}}</span>
+                        <span class="text-black-50">{{userData?.email}}</span>
                     </div>
                 </div>
                 <div class="col-md-5 border-right">
@@ -17,74 +14,116 @@
                             <h4 class="text-right">Profile Settings</h4>
                         </div>
                         <div class="row mt-2">
+
+                            <!-- Name -->
                             <div class="col-md-6">
                                 <label class="labels" for="name">Name</label>
-                                <input type="text" name="name" id="name" class="form-control" placeholder="first name" value="{{userData.name}}" ngModel #name="ngModel">
+                                <input 
+                                    type="text" 
+                                    name="name" 
+                                    id="name" 
+                                    class="form-control" 
+                                    [disabled]="!editMode" 
+                                    ngModel #name="ngModel"
+                                >
                             </div>
+
+                            <!-- Surname -->
                             <div class="col-md-6">
                                 <label class="labels" for="surname">Surname</label>
-                                <input type="text" name="surname" id="surname" class="form-control" value="{{userData.surname}}" placeholder="surname" ngModel #surname="ngModel">
+                                <input 
+                                    type="text" 
+                                    name="surname" 
+                                    id="surname" 
+                                    class="form-control" 
+                                    [disabled]="!editMode"  
+                                    ngModel 
+                                    #surname="ngModel"
+                                >
                             </div>
                         </div>
                         <div class="row mt-3">
+
+                            <!-- Email -->
                             <div class="col-md-12">
                                 <label class="labels" for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" placeholder="enter email id" value="{{userData.email}}" ngModel #email="ngModel">
+                                <input 
+                                    type="email" 
+                                    name="email" 
+                                    id="email" 
+                                    class="form-control" 
+                                    [disabled]="!editMode" 
+                                    ngModel 
+                                    #email="ngModel"
+                                >
                             </div>
+
+                            <!-- Phone number -->
                             <div class="col-md-12">
                                 <label class="labels" for="phoneNumber">Mobile Number</label>
-                                <input type="number" name="phoneNumber" id="phoneNumber" class="form-control" placeholder="enter phone number" value="{{userData.phoneNumber}}" ngModel #phoneNumber="ngModel">
+                                <input 
+                                    type="string" 
+                                    name="phoneNumber" 
+                                    id="phoneNumber" 
+                                    class="form-control" 
+                                    [disabled]="!editMode" 
+                                    ngModel 
+                                    #phoneNumber="ngModel"
+                                >
                             </div>
+
+                            <!-- City -->
                             <div class="col-md-12">
                                 <label class="labels" for="city">City</label>
-                                <input type="text" name="city" id="city" class="form-control" value="{{userData.city}}" ngModel #city="ngModel">
+                                <input 
+                                    type="text" 
+                                    name="city" 
+                                    id="city" 
+                                    class="form-control" 
+                                    [disabled]="!editMode" 
+                                    ngModel 
+                                    #city="ngModel"
+                                >
                             </div>
+
+                            <!-- Delivery Addres -->
                             <div class="col-md-12">
                                 <label class="labels" for="deliveryAddres">Address</label>
-                                <input type="text" name="deliveryAddres" id="deliveryAddres" class="form-control" placeholder="enter address line 1" value="{{userData.deliveryAddres}}" ngModel #deliveryAddres="ngModel">
+                                <input 
+                                    type="text" 
+                                    name="deliveryAddres" 
+                                    id="deliveryAddres" 
+                                    class="form-control" 
+                                    [disabled]="!editMode" 
+                                    ngModel 
+                                    #deliveryAddres="ngModel"
+                                >
                             </div>
+
+                            <!-- Postcode -->
                             <div class="col-md-12">
                                 <label class="labels" for="postcode">Postcode</label>
-                                <input type="text" name="postcode" id="postcode" class="form-control" placeholder="enter address line 2" value="{{userData.postcode}}" ngModel #postcode="ngModel">
+                                <input 
+                                    type="text" 
+                                    name="postcode" 
+                                    id="postcode" 
+                                    class="form-control" 
+                                    [disabled]="!editMode" 
+                                    ngModel 
+                                    #postcode="ngModel">
                             </div>
                         </div>
-                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+
+                        <!-- Button -->
+                        <div class="mt-5 text-center">
+                            <!-- <button class="btn btn-primary profile-button" type="submit">Save Profile</button> -->
+                            <app-load-button
+                            [loading]="btnLoading"
+                            add-class="btn btn-primary profile-button"
+                            >{{btnTitle}}</app-load-button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
-</ng-template>
-
-<ng-template #Profile>
-    <div class="container rounded bg-white mt-5 mb-5">
-        <div class="row justify-content-center">
-            <div class="col-md-3 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <img class="rounded-circle mt-5" width="150px" src="/assets/user-avatar.jpg">
-                    <span class="font-weight-bold">Edogaru</span>
-                    <span class="text-black-50">edogaru@mail.com.my</span>
-                </div>
-            </div>
-            <div class="col-md-5 border-right">
-                <div class="p-3 py-5">
-                    <div class="d-flex justify-content-center align-items-center mb-3">
-                        <h4 class="text-right">Profile Settings</h4>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" value="Petko" disabled></div>
-                        <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="Ivanov" disabled></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Email</label><input type="email" class="form-control" value="maksim_1995@abv.bg" disabled></div>
-                        <div class="col-md-12"><label class="labels">Mobile Number</label><input type="number" class="form-control" value="0878445611" disabled></div>
-                        <div class="col-md-12"><label class="labels">City</label><input type="text" class="form-control" value="Sofia" disabled></div>
-                        <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control" value="Center" disabled></div>
-                        <div class="col-md-12"><label class="labels">Postcode</label><input type="text" class="form-control" value="1000" disabled></div>
-                    </div>
-                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" (click)="editProfile()">Edit Profile</button></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</ng-template>
