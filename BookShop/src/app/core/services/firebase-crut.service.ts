@@ -11,7 +11,7 @@ interface IBook {
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseCRUTService {
+export class FirebaseCRUTService<T> {
 
   // valueChanges -- will return a observable with the value;
   // snapshotChanges -- will return a observable with meta data ( ID ) ;
@@ -19,18 +19,30 @@ export class FirebaseCRUTService {
   constructor(private afs: AngularFirestore) { }
 
   //TODO check and change the types for all requests;
-  
-  addDataWithId(document: IUser, collectionName:string, id: string): Promise<void> {
+
+  addDataWithId(document: IUser, collectionName: string, id: string): Promise<void> {
     return this.afs.collection(collectionName).doc(id).set(document);
   }
 
-   // Read operation - get a single document by its ID
-   getById(documentId: string, collectionName: string): Observable<IUser | IBook | undefined> {
-    return this.afs.collection(collectionName).doc<IUser | IBook>(documentId).valueChanges();
+  // Read operation - get a single document by its ID
+  getById(documentId: string, collectionName: string): Observable<T | undefined> {
+    return this.afs.collection(collectionName).doc<T>(documentId).valueChanges();
+  }
+
+  // PUT-like update operation - update the entire document with new data and return a Promise<void>
+  putUpdate(documentId: string, data: T, colectionName: string): Promise<void> {
+    return this.afs.collection(colectionName).doc(documentId).set(data, { merge: true });
   }
 
 
-  //TODO make all methods below abstract
+  // Update operation - update a document in a collection
+  updateData(documentId: string, data: Partial<T>, colectionName: string): Promise<void> {
+    return this.afs.collection(colectionName).doc(documentId).update(data);
+  }
+
+
+
+  //------------------TODO make all methods below abstract--------------------
 
   add<T>(document: T, collectionName: string): Promise<DocumentReference<T>> {
     return this.afs.collection<T>(collectionName).add(document);
@@ -41,17 +53,7 @@ export class FirebaseCRUTService {
     return this.afs.collection('books').valueChanges();
   }
 
- 
 
-  // Update operation - update a document in a collection
-  update(itemId: string, data: any): Promise<void> {
-    return this.afs.collection('books').doc(itemId).update(data);
-  }
-
-  // PUT-like update operation - update the entire document with new data and return a Promise<void>
-  putUpdateBook(itemId: string, data: IBook): Promise<void> {
-    return this.afs.collection<IBook>('books').doc(itemId).set(data, { merge: true });
-  }
 
   // Delete operation - delete a document from a collection
   delete(itemId: string): Promise<void> {
