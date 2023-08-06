@@ -5,6 +5,7 @@ import { TrimDirective } from './directives/trim-directive';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PasswordMatchDirective } from './directives/password-match-validator.directive';
+import { LoadButtonComponent } from './components/load-button/load-button.component';
 
 
 
@@ -12,7 +13,8 @@ import { PasswordMatchDirective } from './directives/password-match-validator.di
   declarations: [
     BookCardComponent,
     TrimDirective,
-    PasswordMatchDirective
+    PasswordMatchDirective,
+    LoadButtonComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { PasswordMatchDirective } from './directives/password-match-validator.di
     RouterModule,
     BookCardComponent,
     TrimDirective,
-    PasswordMatchDirective
+    PasswordMatchDirective,
+    LoadButtonComponent
   ]
 })
 export class SharedModule { }

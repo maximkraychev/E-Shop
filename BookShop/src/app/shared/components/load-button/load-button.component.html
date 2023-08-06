@@ -1,0 +1,16 @@
+
+<ng-container *ngTemplateOutlet="loading ? loadingButton : readyButton"></ng-container>
+
+<ng-template #readyButton>
+    <button ngClass="{{inputClass}}" [disabled]="isDisabled">
+        <ng-content></ng-content>
+    </button>
+</ng-template>
+
+<ng-template #loadingButton>
+    <button ngClass="{{inputClass}}" disabled>
+        <div class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+    </button>
+</ng-template>
