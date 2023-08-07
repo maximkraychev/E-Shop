@@ -3,11 +3,6 @@ import { AngularFirestore, DocumentReference } from '@angular/fire/compat/firest
 import { Observable } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
 
-interface IBook {
-  title: string,
-  author: string
-}
-
 @Injectable({
   providedIn: 'root'
 })
