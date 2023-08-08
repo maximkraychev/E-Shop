@@ -10,7 +10,7 @@ export class CatalogService {
 
   constructor(private paginationService: GetDataPaginationService<IBook>) { }
 
-  getCatalogPage(firstShownDocument: string | null, lastShownDocument: string | null, query: any) {
-    return this.paginationService.getPaginatedData(COLLECTIONS.BOOKS, this.PAGE_SIZE, firstShownDocument, lastShownDocument, query);
+  getCatalogPage(firstShownDocument: string | number | null, lastShownDocument: string | number | null, sort: any) {
+    return this.paginationService.getPaginatedData(COLLECTIONS.BOOKS, this.PAGE_SIZE, firstShownDocument, lastShownDocument, sort);
   }
 }
