@@ -1,9 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IBook } from 'src/app/core/interfaces/book.interface';
 import { ErrorPopupService } from 'src/app/core/services/error-popup.service';
 import { CatalogService } from '../catalog.service';
-
+import { NgForm } from '@angular/forms';
+import { IFilterData } from 'src/app/core/interfaces/catalog-filter-interface';
+import { SelectOptionValues } from 'src/app/core/interfaces/select-option-values.type';
+import { SORT_TABLE } from 'src/app/config/sort-table';
+import { ISortData } from 'src/app/core/interfaces/catalog-sort.interface';
 
 @Component({
   selector: 'app-catalog',
@@ -11,47 +15,44 @@ import { CatalogService } from '../catalog.service';
   styleUrls: ['./catalog.component.css']
 })
 export class CatalogComponent implements OnInit, OnDestroy {
-  mockData = [
-    { title: 'Game Of Thrones', author: 'George R. R. Martin', price: 50, discount: '', img: '/assets/book1.jpg' },
-    { title: 'Harry Potter And The Order of the Phoenix', author: 'J.K.Rowling', price: 30, discount: '', img: '/assets/book2.jpg' },
-    { title: 'I Am Number Four The Power of Six', author: 'Pittacus Lore', price: 50, discount: 30, img: '/assets/book3.jpg' },
-    { title: 'The Intelligent Investor', author: 'Benjamin Graham', price: 30, discount: 20, img: '/assets/book4.jpg' },
-    { title: 'Elon Musk', author: 'Ashlee Vance', price: 30, discount: 20, img: '/assets/book5.jpg' },
-  ]
 
-  firstShownDocument: string | null = null
-  lastShownDocument: string | null = null;
+  @ViewChild('filterForm') filterForm!: NgForm;
+  @ViewChild('selectElement') selectElement!: ElementRef;
+
+  //Books data;
+  loadedBooks: { id: string, book: IBook }[] | [] = [];
+
+  //For pagination;
+  firstShownDocument: string | number | null = null
+  lastShownDocument: string | number | null = null;
+
+  // For filter;
+  filter!: IFilterData;
+  activeSort: ISortData = SORT_TABLE.fromAtoZ;
+
+  // Subs;
   activeSubs: Subscription[] = []
+  selectElementSub!: Subscription;
 
-
-  constructor(private catalogService: CatalogService, private errorService: ErrorPopupService) { }
+  constructor(private catalogService: CatalogService, private errorService: ErrorPopupService, private render: Renderer2) { }
 
   ngOnInit(): void {
     this.loadForward();
+  }
 
-    setTimeout(() => {
-      this.loadForward();
-    }, 1000)
-    setTimeout(() => {
-      this.loadForward();
-    }, 2000)
-
-    setTimeout(() => {
-      this.loadBackward();
-    }, 3000)
-    setTimeout(() => {
-      this.loadBackward();
-    }, 4000)
-
+  ngAfterViewInit() {
+    this.render.listen(this.selectElement.nativeElement, 'change', this.setActiveSort.bind(this))
   }
 
   loadForward() {
-    this.activeSubs.push(this.catalogService.getCatalogPage(this.lastShownDocument, null, 'title').subscribe({
+    console.log(this.lastShownDocument);
+    
+    // Its invoked on component first load and when 'NEXT' btn is clicked;
+    this.activeSubs.push(this.catalogService.getCatalogPage(this.lastShownDocument, null, this.activeSort).subscribe({
       next: (data) => {
         this.managerForFirstAndLastDocument(data);
         this.managerForActiveSubs();
-
-        console.log(data.map(x => x.book.title));
+        this.loadedBooks = data;
       },
       error: (err: Error) => {
         console.error(err);
@@ -61,11 +62,12 @@ export class CatalogComponent implements OnInit, OnDestroy {
   }
 
   loadBackward() {
-    this.activeSubs.push(this.catalogService.getCatalogPage(null, this.firstShownDocument, 'title').subscribe({
+    // It's invoked on 'PREVIOUS' btn click;
+    this.activeSubs.push(this.catalogService.getCatalogPage(null, this.firstShownDocument, this.activeSort).subscribe({
       next: (data) => {
         this.managerForFirstAndLastDocument(data);
         this.managerForActiveSubs();
-        console.log(data.map(x => x.book.title));
+        this.loadedBooks = data;
       },
       error: (err: Error) => {
         console.error(err);
@@ -78,8 +80,12 @@ export class CatalogComponent implements OnInit, OnDestroy {
     // If we have data save the first and last required param;
     // This is used for starting point for the next forwrd or backward action;
     if (data.length > 0) {
-      this.firstShownDocument = data[0].book.title;
-      this.lastShownDocument = data[data.length - 1].book.title;
+      const param = this.activeSort.sortByParam as 'title' | 'price' | 'discount'
+      console.log(param);
+     
+      
+      this.firstShownDocument = data[0].book[param];
+      this.lastShownDocument = data[data.length - 1].book[param];
     }
   }
 
@@ -91,8 +97,43 @@ export class CatalogComponent implements OnInit, OnDestroy {
     }
   }
 
+  setActiveSort(event: Event) {
+    const activeOption = (event.target as HTMLSelectElement).value as SelectOptionValues;
+    this.activeSort = SORT_TABLE[activeOption] as ISortData;
+    this.firstShownDocument = null;
+    this.lastShownDocument = null;
+    this.loadForward();
+  }
+
+
+  applayFilter() {
+    const values = this.filterForm.value as IFilterData;
+
+    if (typeof values.maxPrice == 'number') {
+      this.filter.maxPrice = values.maxPrice;
+    }
+
+    if (typeof values.minPrice == 'number') {
+      this.filter.maxPrice = values.minPrice;
+    }
+
+    if (values.search != '') {
+      this.filter.search = values.search;
+    }
+
+    if (typeof values.maxPrice == 'number' && typeof values.minPrice == 'number' && values.minPrice > values.maxPrice) {
+      this.errorService.pushErrorMsg('Minimum price cannot exceed maximum price.');
+      return;
+    }
+
+    this.firstShownDocument = null;
+    this.lastShownDocument = null;
+    this.loadForward();
+  }
+
 
   ngOnDestroy(): void {
     this.activeSubs.forEach(x => x.unsubscribe());
+    this.selectElementSub?.unsubscribe();
   }
 }

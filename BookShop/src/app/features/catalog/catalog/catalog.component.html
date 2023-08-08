@@ -11,27 +11,11 @@
           <span>Show filter</span>
         </button>
         <!-- Collapsible wrapper -->
-        <div class="collapse card d-lg-block mb-5" id="filerNavigation">
+        <form #filterForm="ngForm" (ngSubmit)="applayFilter()">
+          <div class="collapse card d-lg-block mb-5" id="filerNavigation">
           <div class="accordion" id="accordionAuthors">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button text-dark bg-light" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  Authors
-                </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show">
-                <div class="accordion-body">
-                  <ul class="list-unstyled">
-                    <li><a href="#" class="text-dark">George R. R. Martin </a></li>
-                    <li><a href="#" class="text-dark">Benjamin Graham </a></li>
-                    <li><a href="#" class="text-dark">Ashlee Vance </a></li>
-                    <li><a href="#" class="text-dark">Henry Carroll </a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
+
+            <!-- <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button text-dark bg-light" type="button" data-bs-toggle="collapse"
                   data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
@@ -41,30 +25,30 @@
               <div id="collapseTwo" class="accordion-collapse collapse show">
                 <div class="accordion-body">
                   <div>
-                    <!-- Checked checkbox -->
+                    <
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked1" checked />
-                      <label class="form-check-label" for="flexCheckChecked1">Photography</label>
+                      <input class="form-check-input" type="checkbox" value="" name="photography" id="photography" ngModel />
+                      <label class="form-check-label" for="photography">Photography</label>
                     </div>
-                    <!-- Checked checkbox -->
+                 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" checked />
-                      <label class="form-check-label" for="flexCheckChecked2">Finance</label>
+                      <input class="form-check-input" type="checkbox" value="" name="finance" id="finance" ngModel />
+                      <label class="form-check-label" for="finance">Finance</label>
                     </div>
-                    <!-- Default checkbox -->
+                  
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                      <label class="form-check-label" for="flexCheckDefault">Biography</label>
+                      <input class="form-check-input" type="checkbox" value="" name="biography" id="biography" ngModel/>
+                      <label class="form-check-label" for="biography">Biography</label>
                     </div>
-                    <!-- Default checkbox -->
+                    
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                      <label class="form-check-label" for="flexCheckDefault">Fantasy</label>
+                      <input class="form-check-input" type="checkbox" value="" name="fantasy" id="fantasy" ngModel/>
+                      <label class="form-check-label" for="fantasy">Fantasy</label>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button text-dark bg-light" type="button" data-bs-toggle="collapse"
@@ -73,132 +57,78 @@
                 </button>
               </h2>
               <div id="collapseThree" class="accordion-collapse collapse show">
-                <div class="accordion-body">
-                  <!-- <div class="range">
-                    <input type="range" class="form-range" id="customRange1" />
-                  </div> -->
+                <div class="accordion-body pb-0">
                   <div class="row mb-3">
                     <div class="col-6">
                       <p class="mb-0">
-                        Min
+                        Min $
                       </p>
                       <div class="form-outline">
-                        <input type="number" id="typeNumber" class="form-control" />
-                        <label class="form-label" for="typeNumber">$0</label>
+                        <input type="number" name="minPrice" id="minPrice" class="form-control" ngModel/>
+                        <label class="form-label" for="minPrice"></label>
                       </div>
                     </div>
                     <div class="col-6">
                       <p class="mb-0">
-                        Max
+                        Max $
                       </p>
                       <div class="form-outline">
-                        <input type="number" id="typeNumber" class="form-control" />
-                        <label class="form-label" for="typeNumber">$1,000</label>
+                        <input type="number" name="maxPrice" id="maxPrice" class="form-control" ngModel/>
+                        <label class="form-label" for="maxPrice"></label>
                       </div>
                     </div>
                   </div>
-                  <button type="button" class="btn btn-white w-100 border border-secondary">apply</button>
+                  <!-- <button type="button" class="btn btn-white w-100 border border-secondary">apply</button> -->
                 </div>
               </div>
             </div>
+
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button text-dark bg-light" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                  Type
+                  data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Search
                 </button>
               </h2>
-              <div id="collapseFour" class="accordion-collapse collapse show">
-                <div class="accordion-body row">
-                  <div class="container d-flex align-items-center justify-content-center col-12">
-                    <input type="checkbox" class="btn-check border justify-content-center" id="btn-check1" checked
-                      autocomplete="off" />
-                    <label class="btn btn-white mb-1 px-1 mx-1" for="btn-check1">Paperback</label>
-                    <input type="checkbox" class="btn-check border justify-content-center" id="btn-check2" checked
-                      autocomplete="off" />
-                    <label class="btn btn-white mb-1 px-1 mx-1" for="btn-check2">Hardcover</label>
+              <div id="collapseThree" class="accordion-collapse collapse show">
+                <div class="accordion-body pb-0">
+                  <div class="mb-3">
+                    <!-- <div class="input-group"> -->
+                      <input type="text" name="search" id="search" class="form-control" placeholder="Search by title" ngModel/>
+                      <label class="form-label" for="search"></label>
+                    <!-- </div> -->
                   </div>
                 </div>
               </div>
             </div>
-            <!-- <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button
-                        class="accordion-button text-dark bg-light"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseFive"
-                        aria-expanded="false"
-                        aria-controls="collapseFive"
-                        >
-                  Ratings
-                </button>
-              </h2>
-              <div id="collapseFive" class="accordion-collapse collapse show">
-                <div class="accordion-body">
-                  
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>
-                      <i class="fas fa-star text-warning"></i>
-                    </label>
-                  </div>
-                
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>
-                      <i class="fas fa-star text-secondary"></i>
-                    </label>
-                  </div>
-                  
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-secondary"></i>
-                      <i class="fas fa-star text-secondary"></i>
-                    </label>
-                  </div>
-                 
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-secondary"></i><i class="fas fa-star text-secondary"></i>
-                      <i class="fas fa-star text-secondary"></i>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div> -->
+
+            
+            <div class="w-100 d-flex justify-content-center">
+             
+              <button type="submit" class="btn btn-white w-75 border border-secondary my-2 filter-submit-btn">apply</button>
+            </div>
+          
           </div>
         </div>
+      </form>
       </div>
       <!-- sidebar -->
       <!-- content -->
       <div class="col-lg-9">
-        <header class="d-sm-flex align-items-center border-bottom mb-4 pb-3">
+        <header class="d-flex align-items-center border-bottom mb-4 pb-3">
           <strong class="d-block py-2">32 Items found </strong>
           <div class="ms-auto">
-            <select class="form-select d-inline-block w-auto border pt-1">
-              <option value="0">Best match</option>
-              <option value="1">Recommended</option>
-              <option value="2">High rated</option>
-              <option value="3">Randomly</option>
+            <select class="form-select d-inline-block w-auto border pt-1" #selectElement>
+              <option value="fromAtoZ">A-Z</option>
+              <option value="highestPrice">Highest Price </option>
+              <option value="lowestPrice">Lowest Price</option>
+              <option value="discount">Discount</option>
             </select>
-            <div class="btn-group shadow-0 border">
-              <a href="#" class="btn btn-light" title="List view">
-                <i class="fa fa-bars fa-lg"></i>
-              </a>
-              <a href="#" class="btn btn-light active" title="Grid view">
-                <i class="fa fa-th fa-lg"></i>
-              </a>
-            </div>
           </div>
         </header>
 
         <div class="row">
-          <ng-container *ngFor="let data of mockData">
+          <ng-container *ngFor="let data of loadedBooks">
             <div class="col-lg-3 col-md-6 col-sm-6 d-flex my-1">
               <app-book-card [book]="data"></app-book-card>
             </div>
@@ -210,18 +140,20 @@
         <!-- Pagination -->
         <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
           <ul class="pagination">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" aria-label="Previous">
+            <li class="page-item mx-2">
+              <a class="page-link forward-back-anchors" (click)="loadBackward()" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
+                Previous
               </a>
             </li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <!-- <li class="page-item active"><a class="page-link" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
+            <li class="page-item"><a class="page-link" href="#">5</a></li> -->
+            <li class="page-item mx-2">
+              <a class="page-link forward-back-anchors" (click)="loadForward()" aria-label="Next">
+                Next
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
@@ -232,4 +164,3 @@
     </div>
   </div>
 </section>
-<!-- sidebar + content -->

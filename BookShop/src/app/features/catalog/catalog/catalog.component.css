@@ -13,7 +13,23 @@
   }
 
   #collapseFour input:checked + label {
-    background-color: #4b4d50; /* Set your desired background color here */
-    color: #fff; /* Set the text color to make it visible */
+    background-color: #6C757D; 
+    color: white;
+    border-color: #6C757D;
+  }
+
+  .filter-submit-btn:hover {
+    background-color: #6C757D;
+    color: white;
+  }
+
+  .forward-back-anchors {
+    color: black;
+  }
+
+  .forward-back-anchors:hover {
+    background-color: #6C757D;
+    color: white;
+    cursor: pointer;
   }
   
