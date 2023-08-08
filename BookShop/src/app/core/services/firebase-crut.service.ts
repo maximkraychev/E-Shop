@@ -15,8 +15,12 @@ export class FirebaseCRUTService<T> {
 
   //TODO check and change the types for all requests;
 
-  addDataWithId(document: IUser, collectionName: string, id: string): Promise<void> {
+  addDataWithId(document: T, collectionName: string, id: string): Promise<void> {
     return this.afs.collection(collectionName).doc(id).set(document);
+  }
+
+  add<T>(document: T, collectionName: string): Promise<DocumentReference<T>> {
+    return this.afs.collection<T>(collectionName).add(document);
   }
 
   // Read operation - get a single document by its ID
@@ -25,23 +29,23 @@ export class FirebaseCRUTService<T> {
   }
 
   // PUT-like update operation - update the entire document with new data and return a Promise<void>
-  putUpdate(documentId: string, data: T, colectionName: string): Promise<void> {
-    return this.afs.collection(colectionName).doc(documentId).set(data, { merge: true });
+  putUpdate(documentId: string, document: T, colectionName: string): Promise<void> {
+    return this.afs.collection(colectionName).doc(documentId).set(document, { merge: true });
   }
 
 
   // Update operation - update a document in a collection
-  updateData(documentId: string, data: Partial<T>, colectionName: string): Promise<void> {
-    return this.afs.collection(colectionName).doc(documentId).update(data);
+  updateData(documentId: string, documentFields: Partial<T>, colectionName: string): Promise<void> {
+    return this.afs.collection(colectionName).doc(documentId).update(documentFields);
   }
+
+
 
 
 
   //------------------TODO make all methods below abstract--------------------
 
-  add<T>(document: T, collectionName: string): Promise<DocumentReference<T>> {
-    return this.afs.collection<T>(collectionName).add(document);
-  }
+  
 
   // Read operation - get all documents in a collection
   getAll(): Observable<any[]> {
