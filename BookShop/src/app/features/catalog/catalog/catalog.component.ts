@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { GetDataPaginationService } from 'src/app/core/services/get-data-pagination.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { IBook } from 'src/app/core/interfaces/book.interface';
+import { ErrorPopupService } from 'src/app/core/services/error-popup.service';
+import { CatalogService } from '../catalog.service';
 
 
 @Component({
@@ -7,30 +10,89 @@ import { GetDataPaginationService } from 'src/app/core/services/get-data-paginat
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css']
 })
-export class CatalogComponent implements OnInit {
+export class CatalogComponent implements OnInit, OnDestroy {
   mockData = [
-    {title: 'Game Of Thrones', author: 'George R. R. Martin', price: 50, discount: '', img: '/assets/book1.jpg'},
-    {title: 'Harry Potter And The Order of the Phoenix', author: 'J.K.Rowling', price: 30, discount: '', img: '/assets/book2.jpg'},
-    {title: 'I Am Number Four The Power of Six', author: 'Pittacus Lore', price: 50, discount: 30, img: '/assets/book3.jpg'},
-    {title: 'The Intelligent Investor', author: 'Benjamin Graham', price: 30, discount: 20, img: '/assets/book4.jpg'},
-    {title: 'Elon Musk', author: 'Ashlee Vance', price: 30, discount: 20, img: '/assets/book5.jpg'},
+    { title: 'Game Of Thrones', author: 'George R. R. Martin', price: 50, discount: '', img: '/assets/book1.jpg' },
+    { title: 'Harry Potter And The Order of the Phoenix', author: 'J.K.Rowling', price: 30, discount: '', img: '/assets/book2.jpg' },
+    { title: 'I Am Number Four The Power of Six', author: 'Pittacus Lore', price: 50, discount: 30, img: '/assets/book3.jpg' },
+    { title: 'The Intelligent Investor', author: 'Benjamin Graham', price: 30, discount: 20, img: '/assets/book4.jpg' },
+    { title: 'Elon Musk', author: 'Ashlee Vance', price: 30, discount: 20, img: '/assets/book5.jpg' },
   ]
 
-  constructor(private paginationService: GetDataPaginationService) {}
+  firstShownDocument: string | null = null
+  lastShownDocument: string | null = null;
+  activeSubs: Subscription[] = []
+
+
+  constructor(private catalogService: CatalogService, private errorService: ErrorPopupService) { }
 
   ngOnInit(): void {
-    this.load(1);
-    setTimeout(()=> {
-      this.load(2);
+    this.loadForward();
+
+    setTimeout(() => {
+      this.loadForward();
+    }, 1000)
+    setTimeout(() => {
+      this.loadForward();
+    }, 2000)
+
+    setTimeout(() => {
+      this.loadBackward();
     }, 3000)
+    setTimeout(() => {
+      this.loadBackward();
+    }, 4000)
+
+  }
+
+  loadForward() {
+    this.activeSubs.push(this.catalogService.getCatalogPage(this.lastShownDocument, null, 'title').subscribe({
+      next: (data) => {
+        this.managerForFirstAndLastDocument(data);
+        this.managerForActiveSubs();
+
+        console.log(data.map(x => x.book.title));
+      },
+      error: (err: Error) => {
+        console.error(err);
+        this.errorService.pushErrorMsg(err.message);
+      }
+    }));
+  }
+
+  loadBackward() {
+    this.activeSubs.push(this.catalogService.getCatalogPage(null, this.firstShownDocument, 'title').subscribe({
+      next: (data) => {
+        this.managerForFirstAndLastDocument(data);
+        this.managerForActiveSubs();
+        console.log(data.map(x => x.book.title));
+      },
+      error: (err: Error) => {
+        console.error(err);
+        this.errorService.pushErrorMsg(err.message);
+      }
+    }));
+  }
+
+  managerForFirstAndLastDocument(data: { id: string, book: IBook }[]) {
+    // If we have data save the first and last required param;
+    // This is used for starting point for the next forwrd or backward action;
+    if (data.length > 0) {
+      this.firstShownDocument = data[0].book.title;
+      this.lastShownDocument = data[data.length - 1].book.title;
+    }
+  }
+
+  managerForActiveSubs() {
+    // Managing subcription so we have only one active;
+    while (this.activeSubs.length > 1) {
+      const sub = this.activeSubs.shift();
+      sub?.unsubscribe();
+    }
   }
 
 
-  load(page: number) {
-    const test = this.paginationService.getPaginatedData('books', 2, 'title', page).subscribe({
-      next: (data) => {
-        console.log(data);
-      }
-    });
+  ngOnDestroy(): void {
+    this.activeSubs.forEach(x => x.unsubscribe());
   }
 }

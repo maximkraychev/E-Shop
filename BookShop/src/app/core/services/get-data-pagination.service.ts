@@ -6,24 +6,41 @@ import { IBook } from '../interfaces/book.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class GetDataPaginationService {
+export class GetDataPaginationService<T> {
 
   constructor(private afs: AngularFirestore) { }
 
-  getPaginatedData(collectionName: string, pageSize: number, order: string, currentPage: number): Observable<{ id: string, book: IBook }[]> {
+  getPaginatedData(
+    collectionName: string,
+    pageSize: number,
+    startAfter: string | null,
+    startBefore: string | null,
+    order: string)
+    : Observable<{ id: string, book: T }[]> {
 
-    let query = this.afs.collection(collectionName, ref => {
+    let ref = this.afs.collection(collectionName, ref => {
       let query = ref.orderBy(order);
 
-
-      if (currentPage > 1) {
-        query = query.startAt(currentPage * pageSize);
+      if (startAfter) {
+        query = query.startAfter(startAfter);
       }
 
-      return query.limit(pageSize);
+      if (startBefore) {
+        query = query.endBefore(startBefore);
+      }
+
+      // First page, start from the beginning and forward
+      if ((!startAfter && !startBefore) || startAfter) {
+        query = query.limit(pageSize);
+      } else {
+        // Backward pagination
+        query = query.limitToLast(pageSize);
+      }
+
+      return query
     });
 
-    return query.snapshotChanges().pipe(
+    return ref.snapshotChanges().pipe(
       map(actions => {
         return actions.map((action): any => {
           const data = action.payload.doc.data();
@@ -32,6 +49,5 @@ export class GetDataPaginationService {
         });
       })
     );
-
   }
 }
