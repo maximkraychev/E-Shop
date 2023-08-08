@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { IBook } from '../interfaces/book.interface';
+import { ISortData } from '../interfaces/catalog-sort.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,15 @@ export class GetDataPaginationService<T> {
   getPaginatedData(
     collectionName: string,
     pageSize: number,
-    startAfter: string | null,
-    startBefore: string | null,
-    order: string)
+    startAfter: string | number | null,
+    startBefore: string | number | null,
+    sort: ISortData)
     : Observable<{ id: string, book: T }[]> {
 
     let ref = this.afs.collection(collectionName, ref => {
-      let query = ref.orderBy(order);
 
+      let query = ref.orderBy(sort.sortByParam, (sort.sortOrder) as 'asc' | 'desc');
+      
       if (startAfter) {
         query = query.startAfter(startAfter);
       }
