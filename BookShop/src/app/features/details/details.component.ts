@@ -4,6 +4,7 @@ import { DetailsService } from './details.service';
 import { IBook } from 'src/app/core/interfaces/book.interface';
 import { ErrorPopupService } from 'src/app/core/services/error-popup.service';
 import { Subscription } from 'rxjs';
+import { ShopingCartManagerService } from 'src/app/core/services/shopping-cart-manager.service';
 
 @Component({
   selector: 'app-details',
@@ -21,7 +22,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private activeRoute: ActivatedRoute,
     private detailService: DetailsService,
     private errorService: ErrorPopupService,
-    private router: Router
+    private router: Router,
+    private shoppingCartService: ShopingCartManagerService
   ) {
     this.bookId = this.activeRoute.snapshot.params['id'];
   }
@@ -31,7 +33,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       next: (book) => {
         this.bookData = book;
         if (this.bookData == undefined) {
-          this.errorService.pushErrorMsg('The requested item could not be found.');
+          this.errorService.pushErrorMsg('Oops! The requested item could not be found.');
           this.router.navigate(['/catalog']);
         }
       },
@@ -41,6 +43,22 @@ export class DetailsComponent implements OnInit, OnDestroy {
         this.router.navigate(['/catalog']);
       }
     });
+  }
+
+  // Add book to the session storage;
+  addItem() {
+    if(this.bookData) {
+      this.shoppingCartService.transformAndAddToSession(this.bookData, this.bookId, this.quantity);
+    } else {
+      // This error should not be activated because we check for book at the component init (if there is no book it redirect to catalog);
+      this.errorService.pushErrorMsg('Oops! The book you\'re looking for is either not loaded yet or doesn\'t exist.');
+    }
+  }
+
+  // Add book to the session storage and then navigate to shopping-cart;
+  buyItem() {
+    this.addItem();
+    this.router.navigate(['/shopping-cart']);
   }
 
   plusQuantity() {
@@ -54,7 +72,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     if (this.quantity <= 1) {
       return;
     }
-
     this.quantity--;
   }
 
