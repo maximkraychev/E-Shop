@@ -4,5 +4,6 @@ export interface IShoppingCartData {
     price: number;
     discount: number;
     image: string;
-    id: string
+    id: string;
+    quantity: number
 }
