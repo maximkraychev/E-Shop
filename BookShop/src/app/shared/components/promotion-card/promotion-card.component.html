@@ -1,0 +1,11 @@
+<div class="d-flex flex-row">
+    <ng-container *ngTemplateOutlet="!!discount ? discountPrice : regular"></ng-container>
+    <ng-template #regular>
+        <h5 class="mb-1 me-1">${{regularPrice}}</h5>
+    </ng-template>
+    <ng-template #discountPrice>
+        <h5 class="mb-1 me-1">${{(regularPrice - (regularPrice * (discount / 100))).toFixed(2)}}</h5>
+        <span class="text-danger"><s>${{regularPrice}}</s></span>
+        <h5 class="discount">{{discount}}%</h5>
+    </ng-template>
+</div>
