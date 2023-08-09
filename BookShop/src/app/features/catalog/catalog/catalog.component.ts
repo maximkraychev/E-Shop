@@ -20,6 +20,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
   @ViewChild('selectElement') selectElement!: ElementRef;
 
   //Books data;
+  collectionSize!: number;
   loadedBooks: { id: string, book: IBook }[] | [] = [];
 
   //For pagination;
@@ -27,17 +28,19 @@ export class CatalogComponent implements OnInit, OnDestroy {
   lastShownDocument: string | number | null = null;
 
   // For filter;
-  filter!: IFilterData;
+  filter: IFilterData = {};
   activeSort: ISortData = SORT_TABLE.fromAtoZ;
 
   // Subs;
   activeSubs: Subscription[] = []
   selectElementSub!: Subscription;
+  sizeSub!: Subscription;
 
   constructor(private catalogService: CatalogService, private errorService: ErrorPopupService, private render: Renderer2) { }
 
   ngOnInit(): void {
     this.loadForward();
+    this.sizeSub = this.catalogService.getBooksCollectionSize().subscribe((size) => this.collectionSize = size);
   }
 
   ngAfterViewInit() {
@@ -45,10 +48,8 @@ export class CatalogComponent implements OnInit, OnDestroy {
   }
 
   loadForward() {
-    console.log(this.lastShownDocument);
-    
     // Its invoked on component first load and when 'NEXT' btn is clicked;
-    this.activeSubs.push(this.catalogService.getCatalogPage(this.lastShownDocument, null, this.activeSort).subscribe({
+    this.activeSubs.push(this.catalogService.getCatalogPage(this.lastShownDocument, null, this.activeSort, this.filter).subscribe({
       next: (data) => {
         this.managerForFirstAndLastDocument(data);
         this.managerForActiveSubs();
@@ -63,7 +64,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
   loadBackward() {
     // It's invoked on 'PREVIOUS' btn click;
-    this.activeSubs.push(this.catalogService.getCatalogPage(null, this.firstShownDocument, this.activeSort).subscribe({
+    this.activeSubs.push(this.catalogService.getCatalogPage(null, this.firstShownDocument, this.activeSort, this.filter).subscribe({
       next: (data) => {
         this.managerForFirstAndLastDocument(data);
         this.managerForActiveSubs();
@@ -80,9 +81,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
     // If we have data save the first and last required param;
     // This is used for starting point for the next forwrd or backward action;
     if (data.length > 0) {
-      const param = this.activeSort.sortByParam as 'title' | 'price' | 'discount'
-      console.log(param);
-     
+      const param = this.activeSort.sortByParam as 'title' | 'price' | 'discount';
       
       this.firstShownDocument = data[0].book[param];
       this.lastShownDocument = data[data.length - 1].book[param];
@@ -126,14 +125,19 @@ export class CatalogComponent implements OnInit, OnDestroy {
       return;
     }
 
+    console.log(this.filter);
+    
+
     this.firstShownDocument = null;
     this.lastShownDocument = null;
     this.loadForward();
+    console.log(this.loadedBooks);
+    
   }
-
 
   ngOnDestroy(): void {
     this.activeSubs.forEach(x => x.unsubscribe());
     this.selectElementSub?.unsubscribe();
+    this.sizeSub
   }
 }

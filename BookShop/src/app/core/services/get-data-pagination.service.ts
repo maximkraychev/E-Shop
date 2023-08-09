@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, map, tap } from 'rxjs';
 import { IBook } from '../interfaces/book.interface';
 import { ISortData } from '../interfaces/catalog-sort.interface';
+import { IFilterData } from '../interfaces/catalog-filter-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,29 @@ export class GetDataPaginationService<T> {
     pageSize: number,
     startAfter: string | number | null,
     startBefore: string | number | null,
-    sort: ISortData)
+    sort: ISortData,
+    filter: IFilterData)
     : Observable<{ id: string, book: T }[]> {
 
     let ref = this.afs.collection(collectionName, ref => {
+      
+      // if(filter.minPrice != undefined || filter.maxPrice != undefined) {
 
+      //   query = ref.orderBy('price')
+
+      //   if(filter.minPrice != undefined) {
+      //     query.where('price', '>=', filter.minPrice);
+      //   }
+  
+      //   if(filter.maxPrice != undefined) {
+      //     query.where('price', '<=', filter.maxPrice);
+      //   }
+
+      // } else {
+      // }
+      
       let query = ref.orderBy(sort.sortByParam, (sort.sortOrder) as 'asc' | 'desc');
+    
       
       if (startAfter) {
         query = query.startAfter(startAfter);
@@ -51,5 +69,10 @@ export class GetDataPaginationService<T> {
         });
       })
     );
+  }
+
+
+  getCollectionSize(collectionName:string) {
+    return this.afs.collection(collectionName).get().pipe(map(snapshot => snapshot.size));
   }
 }
