@@ -4,12 +4,14 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterLink } from '@angular/router';
 import { MainLoaderComponent } from './main-loader/main-loader.component';
+import { ErrorComponentComponent } from './error-component/error-component.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    MainLoaderComponent
+    MainLoaderComponent,
+    ErrorComponentComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { MainLoaderComponent } from './main-loader/main-loader.component';
   exports: [
     HeaderComponent,
     FooterComponent,
-    MainLoaderComponent
+    MainLoaderComponent,
+    ErrorComponentComponent
   ]
 })
 export class CoreModule { 
