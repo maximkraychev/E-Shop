@@ -39,7 +39,11 @@ export class CatalogComponent implements OnInit, OnDestroy {
   selectElementSub!: () => void;
   sizeSub!: Subscription;
 
-  constructor(private catalogService: CatalogService, private errorService: ErrorPopupService, private render: Renderer2) { }
+  constructor(
+    private catalogService: CatalogService,
+    private errorService: ErrorPopupService,
+    private render: Renderer2,
+    ) { }
 
   ngOnInit(): void {
     // On init load the initial books and collection size;
@@ -93,7 +97,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
     // This is used for starting point for the next forwrd or backward action;
     if (data.length > 0) {
       const param = this.activeSort.sortByParam as 'title' | 'price' | 'discount';
-      
+
       this.firstShownDocument = data[0].book[param];
       this.lastShownDocument = data[data.length - 1].book[param];
     }
@@ -115,7 +119,6 @@ export class CatalogComponent implements OnInit, OnDestroy {
     this.loadForward();
   }
 
-
   applayFilter() {
     // const values = this.filterForm.value as IFilterData;
 
@@ -135,13 +138,13 @@ export class CatalogComponent implements OnInit, OnDestroy {
     //   this.errorService.pushErrorMsg('Minimum price cannot exceed maximum price.');
     //   return;
     // }
-    
+
 
     // this.firstShownDocument = null;
     // this.lastShownDocument = null;
     // this.loadForward();
     // console.log(this.loadedBooks);
-    
+
   }
 
   ngOnDestroy(): void {
