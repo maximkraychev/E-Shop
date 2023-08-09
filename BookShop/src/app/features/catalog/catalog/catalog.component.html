@@ -14,41 +14,6 @@
         <form #filterForm="ngForm" (ngSubmit)="applayFilter()">
           <div class="collapse card d-lg-block mb-5" id="filerNavigation">
           <div class="accordion" id="accordionAuthors">
-
-            <!-- <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button text-dark bg-light" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
-                  Categories
-                </button>
-              </h2>
-              <div id="collapseTwo" class="accordion-collapse collapse show">
-                <div class="accordion-body">
-                  <div>
-                    <
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" name="photography" id="photography" ngModel />
-                      <label class="form-check-label" for="photography">Photography</label>
-                    </div>
-                 
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" name="finance" id="finance" ngModel />
-                      <label class="form-check-label" for="finance">Finance</label>
-                    </div>
-                  
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" name="biography" id="biography" ngModel/>
-                      <label class="form-check-label" for="biography">Biography</label>
-                    </div>
-                    
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" name="fantasy" id="fantasy" ngModel/>
-                      <label class="form-check-label" for="fantasy">Fantasy</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button text-dark bg-light" type="button" data-bs-toggle="collapse"
@@ -78,7 +43,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- <button type="button" class="btn btn-white w-100 border border-secondary">apply</button> -->
+         
                 </div>
               </div>
             </div>
@@ -93,10 +58,8 @@
               <div id="collapseThree" class="accordion-collapse collapse show">
                 <div class="accordion-body pb-0">
                   <div class="mb-3">
-                    <!-- <div class="input-group"> -->
                       <input type="text" name="search" id="search" class="form-control" placeholder="Search by title" ngModel/>
                       <label class="form-label" for="search"></label>
-                    <!-- </div> -->
                   </div>
                 </div>
               </div>
@@ -116,7 +79,7 @@
       <!-- content -->
       <div class="col-lg-9">
         <header class="d-flex align-items-center border-bottom mb-4 pb-3">
-          <strong class="d-block py-2">{{collectionSize}} Items found </strong>
+          <strong class="d-block py-2" >{{collectionSize}} Items found </strong>
           <div class="ms-auto">
             <select class="form-select d-inline-block w-auto border pt-1" #selectElement>
               <option value="fromAtoZ">A-Z</option>
@@ -128,10 +91,15 @@
         </header>
 
         <div class="row">
-          <ng-container *ngFor="let data of loadedBooks">
-            <div class="col-lg-3 col-md-6 col-sm-6 d-flex my-1">
-              <app-book-card [book]="data"></app-book-card>
-            </div>
+          <ng-container *ngIf="!statusLoader">
+            <ng-container *ngFor="let data of loadedBooks">
+              <div class="col-lg-3 col-md-6 col-sm-6 d-flex my-1">
+                <app-book-card [book]="data"></app-book-card>
+              </div>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngIf="statusLoader">
+            <app-loader></app-loader>
           </ng-container>
         </div>
 

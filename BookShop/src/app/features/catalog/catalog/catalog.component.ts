@@ -19,6 +19,9 @@ export class CatalogComponent implements OnInit, OnDestroy {
   @ViewChild('filterForm') filterForm!: NgForm;
   @ViewChild('selectElement') selectElement!: ElementRef;
 
+  // Loader status;
+  statusLoader: boolean = true;
+
   //Books data;
   collectionSize!: number;
   loadedBooks: { id: string, book: IBook }[] | [] = [];
@@ -50,31 +53,37 @@ export class CatalogComponent implements OnInit, OnDestroy {
   }
 
   loadForward() {
+    this.statusLoader = true;
     // Its invoked on component first load and when 'NEXT' btn is clicked;
     this.activeSubsForBooksData.push(this.catalogService.getCatalogPage(this.lastShownDocument, null, this.activeSort, this.filter).subscribe({
       next: (data) => {
         this.managerForFirstAndLastDocument(data);
         this.managerForActiveSubs();
         this.loadedBooks = data;
+        this.statusLoader = false;
       },
       error: (err: Error) => {
         console.error(err);
         this.errorService.pushErrorMsg(err.message);
+        this.statusLoader = false;
       }
     }));
   }
 
   loadBackward() {
+    this.statusLoader = true;
     // It's invoked on 'PREVIOUS' btn click;
     this.activeSubsForBooksData.push(this.catalogService.getCatalogPage(null, this.firstShownDocument, this.activeSort, this.filter).subscribe({
       next: (data) => {
         this.managerForFirstAndLastDocument(data);
         this.managerForActiveSubs();
         this.loadedBooks = data;
+        this.statusLoader = false;
       },
       error: (err: Error) => {
         console.error(err);
         this.errorService.pushErrorMsg(err.message);
+        this.statusLoader = false;
       }
     }));
   }
