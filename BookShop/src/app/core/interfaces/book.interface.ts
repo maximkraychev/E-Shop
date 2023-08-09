@@ -8,4 +8,5 @@ export interface IBook {
     discount: number;
     genre: string[];
     image: string;
+    description: string;
 }
