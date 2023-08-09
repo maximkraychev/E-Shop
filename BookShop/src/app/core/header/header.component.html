@@ -24,10 +24,6 @@
                   <a routerLink="/catalog" class="nav-link open-sans"> <i class="fa-solid fa-layer-group px-1"></i>Catalog</a>
               </li>
 
-              <li class="nav-item">
-                <a href="" class="nav-link open-sans"><i class="fa-solid fa-cart-shopping px-1"></i>My card</a>
-              </li>
-
             <ng-container *ngTemplateOutlet=" userState ? forUserTemplate : forGuestTemplate"></ng-container>
 
             <ng-template #forGuestTemplate>
@@ -40,6 +36,9 @@
             </ng-template>
 
             <ng-template #forUserTemplate>
+                <li class="nav-item">
+                    <a routerLink="/shopping-cart" class="nav-link open-sans"><i class="fa-solid fa-cart-shopping px-1"></i>My card</a>
+                  </li>
                 <li class="nav-item">
                     <a href="" class="nav-link open-sans"><i class="fa-solid fa-heart px-1"></i>Wishlist</a>
                   </li>
