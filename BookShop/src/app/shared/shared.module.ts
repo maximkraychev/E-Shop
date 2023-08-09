@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PasswordMatchDirective } from './directives/password-match-validator.directive';
 import { LoadButtonComponent } from './components/load-button/load-button.component';
+import { PromotionCardComponent } from './components/promotion-card/promotion-card.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 
 
@@ -14,7 +16,9 @@ import { LoadButtonComponent } from './components/load-button/load-button.compon
     BookCardComponent,
     TrimDirective,
     PasswordMatchDirective,
-    LoadButtonComponent
+    LoadButtonComponent,
+    PromotionCardComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +32,9 @@ import { LoadButtonComponent } from './components/load-button/load-button.compon
     BookCardComponent,
     TrimDirective,
     PasswordMatchDirective,
-    LoadButtonComponent
+    LoadButtonComponent,
+    PromotionCardComponent,
+    LoaderComponent
   ]
 })
 export class SharedModule { }
