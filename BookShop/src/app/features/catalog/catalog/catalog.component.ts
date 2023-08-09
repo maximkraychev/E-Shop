@@ -32,24 +32,26 @@ export class CatalogComponent implements OnInit, OnDestroy {
   activeSort: ISortData = SORT_TABLE.fromAtoZ;
 
   // Subs;
-  activeSubs: Subscription[] = []
-  selectElementSub!: Subscription;
+  activeSubsForBooksData: Subscription[] = []
+  selectElementSub!: () => void;
   sizeSub!: Subscription;
 
   constructor(private catalogService: CatalogService, private errorService: ErrorPopupService, private render: Renderer2) { }
 
   ngOnInit(): void {
+    // On init load the initial books and collection size;
     this.loadForward();
     this.sizeSub = this.catalogService.getBooksCollectionSize().subscribe((size) => this.collectionSize = size);
   }
 
   ngAfterViewInit() {
-    this.render.listen(this.selectElement.nativeElement, 'change', this.setActiveSort.bind(this))
+    // Set a listener on select btn and change the content on value chnage; 
+    this.selectElementSub = this.render.listen(this.selectElement.nativeElement, 'change', this.setActiveSort.bind(this));
   }
 
   loadForward() {
     // Its invoked on component first load and when 'NEXT' btn is clicked;
-    this.activeSubs.push(this.catalogService.getCatalogPage(this.lastShownDocument, null, this.activeSort, this.filter).subscribe({
+    this.activeSubsForBooksData.push(this.catalogService.getCatalogPage(this.lastShownDocument, null, this.activeSort, this.filter).subscribe({
       next: (data) => {
         this.managerForFirstAndLastDocument(data);
         this.managerForActiveSubs();
@@ -64,7 +66,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
   loadBackward() {
     // It's invoked on 'PREVIOUS' btn click;
-    this.activeSubs.push(this.catalogService.getCatalogPage(null, this.firstShownDocument, this.activeSort, this.filter).subscribe({
+    this.activeSubsForBooksData.push(this.catalogService.getCatalogPage(null, this.firstShownDocument, this.activeSort, this.filter).subscribe({
       next: (data) => {
         this.managerForFirstAndLastDocument(data);
         this.managerForActiveSubs();
@@ -90,8 +92,8 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
   managerForActiveSubs() {
     // Managing subcription so we have only one active;
-    while (this.activeSubs.length > 1) {
-      const sub = this.activeSubs.shift();
+    while (this.activeSubsForBooksData.length > 1) {
+      const sub = this.activeSubsForBooksData.shift();
       sub?.unsubscribe();
     }
   }
@@ -106,38 +108,37 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
 
   applayFilter() {
-    const values = this.filterForm.value as IFilterData;
+    // const values = this.filterForm.value as IFilterData;
 
-    if (typeof values.maxPrice == 'number') {
-      this.filter.maxPrice = values.maxPrice;
-    }
+    // if (typeof values.maxPrice == 'number') {
+    //   this.filter.maxPrice = values.maxPrice;
+    // }
 
-    if (typeof values.minPrice == 'number') {
-      this.filter.maxPrice = values.minPrice;
-    }
+    // if (typeof values.minPrice == 'number') {
+    //   this.filter.maxPrice = values.minPrice;
+    // }
 
-    if (values.search != '') {
-      this.filter.search = values.search;
-    }
+    // if (values.search != '') {
+    //   this.filter.search = values.search;
+    // }
 
-    if (typeof values.maxPrice == 'number' && typeof values.minPrice == 'number' && values.minPrice > values.maxPrice) {
-      this.errorService.pushErrorMsg('Minimum price cannot exceed maximum price.');
-      return;
-    }
-
-    console.log(this.filter);
+    // if (typeof values.maxPrice == 'number' && typeof values.minPrice == 'number' && values.minPrice > values.maxPrice) {
+    //   this.errorService.pushErrorMsg('Minimum price cannot exceed maximum price.');
+    //   return;
+    // }
     
 
-    this.firstShownDocument = null;
-    this.lastShownDocument = null;
-    this.loadForward();
-    console.log(this.loadedBooks);
+    // this.firstShownDocument = null;
+    // this.lastShownDocument = null;
+    // this.loadForward();
+    // console.log(this.loadedBooks);
     
   }
 
   ngOnDestroy(): void {
-    this.activeSubs.forEach(x => x.unsubscribe());
-    this.selectElementSub?.unsubscribe();
-    this.sizeSub
+    // Unsubscribe
+    this.activeSubsForBooksData.forEach(x => x.unsubscribe());
+    this.sizeSub.unsubscribe();
+    this.selectElementSub();
   }
 }
