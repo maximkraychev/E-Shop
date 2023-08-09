@@ -1,28 +1,32 @@
 <section class="py-5">
-  <div class="container">
+  <div class="container" *ngIf="bookData">
     <div class="row gx-5">
       <aside class="col-lg-6">
         <div class="border rounded-4 mb-3 d-flex justify-content-center align-items-center">
           <a data-fslightbox="mygalley" class="rounded-4 d-flex justify-content-center align-items-center" target="_blank" data-type="image" href="/assets/book1.jpg">
-            <img style="max-width: 75%; max-height: 75vh; margin: auto;" class="rounded-4 fit" src="/assets/book2.jpg" />
+            <img style="max-width: 75%; max-height: 75vh; margin: auto;" class="rounded-4 fit" src="{{bookData.image}}" alt="Book img"/>
           </a>
         </div>
       </aside>
       <main class="col-lg-6">
         <div class="ps-lg-3">
           <h4 class="title text-dark">
-            A Game of Thrones
+            {{bookData.title}}
           </h4>
-          <div class="d-flex flex-row my-3">
+          <!-- <div class="d-flex flex-row my-3">
             <span class="text-success ms-2">In stock</span>
-          </div>
+          </div> -->
 
-          <div class="mb-3">
-            <span class="h5">$75.00</span>
+          <!-- <div class="mb-3 py-2">
+            <span class="h4">${{bookData?.price}}</span>
+          </div> -->
+
+          <div class="mb-3 py-2">
+            <app-promotion-card [regularPrice]="bookData.price" [discount]="bookData.discount"></app-promotion-card>
           </div>
 
           <p>
-            George R. R. Martin's 'A Game of Thrones' is a gripping medieval fantasy epic set in the land of Westeros, where noble families battle for power and control. With complex characters and intricate political plots, it weaves a captivating tale of ambition, betrayal, and survival.
+            {{bookData.description}}
           </p>
 
           <div class="row">
@@ -30,46 +34,46 @@
               <i class="fa-solid fa-user mx-2"></i>
               <dt class="m-0">Author:</dt>
             </div>
-            <dd class="col-12 col-md-9">George R. R. Martin</dd>
+            <dd class="col-12 col-md-9">{{bookData.author}}</dd>
           
             <div class="col-12 col-md-3 d-flex align-items-center">
               <i class="fa-solid fa-calendar-days mx-2"></i>
               <dt class="m-0">Year</dt>
             </div>
-            <dd class="col-12 col-md-9">2015</dd>
+            <dd class="col-12 col-md-9">{{bookData.year}}</dd>
           
             <div class="col-12 col-md-3 d-flex align-items-center">
               <i class="fa-solid fa-globe mx-2"></i>
               <dt class="m-0">Language</dt>
             </div>
-            <dd class="col-12 col-md-9">English</dd>
+            <dd class="col-12 col-md-9">{{bookData.language}}</dd>
           
             <div class="col-12 col-md-3 d-flex align-items-center">
               <i class="fa-solid fa-book mx-2"></i>
               <dt class="m-0">Length</dt>
             </div>
-            <dd class="col-12 col-md-9">300 pages</dd>
+            <dd class="col-12 col-md-9">{{bookData.length}} pages</dd>
           </div>
           
           <hr />
 
           <div class="row mb-4">
-            <div class="col-md-4 col-6">
+            <!-- <div class="col-md-4 col-6">
               <label class="mb-2">Cover</label>
               <select class="form-select border border-secondary" style="height: 38px;">
                 <option>Paperback</option>
                 <option>Hardcover</option>
               </select>
-            </div>
+            </div> -->
             <!-- col.// -->
             <div class="col-md-4 col-6 mb-3">
               <label class="mb-2 d-block">Quantity</label>
               <div class="input-group mb-3" style="width: 170px;">
-                <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark">
+                <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark" (click)="minusQuantity()">
                   <i class="fas fa-minus"></i>
                 </button>
-                <input type="text" class="form-control text-center border border-secondary" value="1" aria-label="Example text with button addon" aria-describedby="button-addon1" />
-                <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark">
+                <input type="text" class="form-control text-center border border-secondary" value="{{quantity}}" aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark" (click)="plusQuantity()">
                   <i class="fas fa-plus"></i>
                 </button>
               </div>
