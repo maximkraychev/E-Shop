@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { DetailsComponent } from './details.component';
 import { DetailsRoutingModule } from './details-routing.module';
+import { DetailsService } from './details.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -10,8 +11,11 @@ import { DetailsRoutingModule } from './details-routing.module';
     DetailsComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     DetailsRoutingModule
+  ],
+  providers: [
+    DetailsService
   ]
 })
 export class DetailsModule { }
