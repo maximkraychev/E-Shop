@@ -6,7 +6,7 @@
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title open-sans">{{data.book.title}}</h5>
                 <a href="/author" class="card-link italic">{{data.book.author}}</a>
-                <div class="d-flex flex-row">
+                <!-- <div class="d-flex flex-row">
                     <ng-container *ngTemplateOutlet="!!data.book.discount ? discountPrice : regular"></ng-container>
                     <ng-template #regular>
                         <h5 class="mb-1 me-1">${{data.book.price}}</h5>
@@ -16,7 +16,8 @@
                         <span class="text-danger"><s>${{data.book.price}}</s></span>
                         <h5 class="discount">{{data.book.discount}}%</h5>   
                     </ng-template>
-                </div>
+                </div> -->
+                    <app-promotion-card [regularPrice]="data.book.price" [discount]="data.book.discount"></app-promotion-card>
                 <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
                     <a href="#!" class="btn btn-light border px-1 pt-2 icon-hover open-sans col-6"><i class="fa-solid fa-cart-shopping px-1"></i>Add</a>
                     <a href="#!" class="btn btn-light border px-1 pt-2 icon-hover col-6"><i class="fas fa-heart fa-lg text-dark px-1"></i></a>
