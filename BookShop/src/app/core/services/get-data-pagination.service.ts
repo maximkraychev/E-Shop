@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable, map, tap } from 'rxjs';
-import { IBook } from '../interfaces/book.interface';
+import { Observable, map } from 'rxjs';
 import { ISortData } from '../interfaces/catalog-sort.interface';
 import { IFilterData } from '../interfaces/catalog-filter-interface';
 
