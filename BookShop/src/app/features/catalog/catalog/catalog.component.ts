@@ -8,6 +8,7 @@ import { IFilterData } from 'src/app/core/interfaces/catalog-filter-interface';
 import { SelectOptionValues } from 'src/app/core/interfaces/select-option-values.type';
 import { SORT_TABLE } from 'src/app/config/sort-table';
 import { ISortData } from 'src/app/core/interfaces/catalog-sort.interface';
+import { PAGE_SIZE } from 'src/app/config/catalog-page-size';
 
 @Component({
   selector: 'app-catalog',
@@ -19,7 +20,11 @@ export class CatalogComponent implements OnInit, OnDestroy {
   @ViewChild('filterForm') filterForm!: NgForm;
   @ViewChild('selectElement') selectElement!: ElementRef;
 
-  // Loader status;
+  // Page numbe state;
+  currentPageNumber: number = 0;
+  maxPageNumber: number = 1;
+
+  // Loader state;
   statusLoader: boolean = true;
 
   //Books data;
@@ -27,7 +32,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
   loadedBooks: { id: string, book: IBook }[] | [] = [];
 
   //For pagination;
-  firstShownDocument: string | number | null = null
+  firstShownDocument: string | number | null = null;
   lastShownDocument: string | number | null = null;
 
   // For filter;
@@ -35,7 +40,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
   activeSort: ISortData = SORT_TABLE.fromAtoZ;
 
   // Subs;
-  activeSubsForBooksData: Subscription[] = []
+  activeSubsForBooksData: Subscription[] = [];
   selectElementSub!: () => void;
   sizeSub!: Subscription;
 
@@ -43,12 +48,15 @@ export class CatalogComponent implements OnInit, OnDestroy {
     private catalogService: CatalogService,
     private errorService: ErrorPopupService,
     private render: Renderer2,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     // On init load the initial books and collection size;
-    this.loadForward();
-    this.sizeSub = this.catalogService.getBooksCollectionSize().subscribe((size) => this.collectionSize = size);
+    this.sizeSub = this.catalogService.getBooksCollectionSize().subscribe((size) => {
+      this.collectionSize = size;
+      this.maxPageNumber = Math.ceil(size / PAGE_SIZE.CATALOG);
+      this.loadForward();
+    });
   }
 
   ngAfterViewInit() {
@@ -57,7 +65,13 @@ export class CatalogComponent implements OnInit, OnDestroy {
   }
 
   loadForward() {
+    
+    if (this.currentPageNumber >= this.maxPageNumber) {
+      return;
+    }
+
     this.statusLoader = true;
+
     // Its invoked on component first load and when 'NEXT' btn is clicked;
     this.activeSubsForBooksData.push(this.catalogService.getCatalogPage(this.lastShownDocument, null, this.activeSort, this.filter).subscribe({
       next: (data) => {
@@ -65,6 +79,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
         this.managerForActiveSubs();
         this.loadedBooks = data;
         this.statusLoader = false;
+        this.currentPageNumber++;
       },
       error: (err: Error) => {
         console.error(err);
@@ -75,6 +90,11 @@ export class CatalogComponent implements OnInit, OnDestroy {
   }
 
   loadBackward() {
+
+    if (this.currentPageNumber <= 1) {
+      return;
+    }
+
     this.statusLoader = true;
     // It's invoked on 'PREVIOUS' btn click;
     this.activeSubsForBooksData.push(this.catalogService.getCatalogPage(null, this.firstShownDocument, this.activeSort, this.filter).subscribe({
@@ -83,6 +103,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
         this.managerForActiveSubs();
         this.loadedBooks = data;
         this.statusLoader = false;
+        this.currentPageNumber--;
       },
       error: (err: Error) => {
         console.error(err);
@@ -105,7 +126,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
   managerForActiveSubs() {
     // Managing subcription so we have only one active;
-    while (this.activeSubsForBooksData.length > 1) {
+    while (this.activeSubsForBooksData.length > 0) {
       const sub = this.activeSubsForBooksData.shift();
       sub?.unsubscribe();
     }
@@ -114,8 +135,11 @@ export class CatalogComponent implements OnInit, OnDestroy {
   setActiveSort(event: Event) {
     const activeOption = (event.target as HTMLSelectElement).value as SelectOptionValues;
     this.activeSort = SORT_TABLE[activeOption] as ISortData;
+
+    // reset the state and load the new data;
     this.firstShownDocument = null;
     this.lastShownDocument = null;
+    this.currentPageNumber = 0;
     this.loadForward();
   }
 
