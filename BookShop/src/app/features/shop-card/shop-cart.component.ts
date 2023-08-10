@@ -2,6 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IShoppingCartData } from 'src/app/core/interfaces/shopping-cart-data.interface';
 import { ShopingCartManagerService } from 'src/app/core/services/shopping-cart-manager.service';
 import { SESSION_STORAGE_KEYS } from 'src/app/config/session-storage-keys'
+import { Router } from '@angular/router';
+import { UserStateService } from 'src/app/core/services/user-state.service';
+import { ErrorPopupService } from 'src/app/core/services/error-popup.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-card',
@@ -16,7 +20,14 @@ export class CardComponent implements OnDestroy, OnInit {
   discount: number = 0;
   totalPriceAfterDiscount: number = 0;
 
-  constructor(private shoppingCartService: ShopingCartManagerService) {
+  constructor(
+    private shoppingCartService: ShopingCartManagerService, 
+    private router: Router, 
+    private userStateService: UserStateService,
+    private errorService: ErrorPopupService
+    ) {
+
+      
     // Load books from session store and if its not null save it in component;
     const sessionData = this.shoppingCartService.getShopCart();
 
@@ -76,6 +87,28 @@ export class CardComponent implements OnDestroy, OnInit {
       this.books.splice(index, 1);
       this.calculateTotal();
     }
+  }
+
+
+  onPurchase() {
+     this.userStateService.user$.pipe(take(1)).subscribe({
+      next: (userStatus) => {
+        if(userStatus == null) {
+          this.errorService.pushErrorMsg('Oops! You must be a registered user to make a purchase.');
+          this.router.navigate(['/user/login']);
+          return;
+        }
+        
+        this.books = []; // ng on destroy will take care of the rest;
+        this.router.navigate(['/thank-you']);
+        //  TODO save data in firestore;
+        //  and redirect to thank you for your purchase page;
+      },
+      error: (err) => {
+        console.error(err);
+        this.errorService.pushErrorMsg(err.message);
+      }
+    })
   }
 
   // On destroy save the local changes to the session store;
