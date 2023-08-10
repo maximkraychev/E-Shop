@@ -41,14 +41,14 @@ export class RegisterComponent {
         // That way we are sure there are no additionally added fluids;
         if (userCredential.user?.uid) {
           const userData: IUser = {
-            city: formData.city,
-            deliveryAddres: formData.deliveryAddres,
-            email: formData.email,
-            name: formData.name,
-            phoneNumber: formData.phoneNumber,
-            postcode: formData.postcode,
-            surname: formData.surname,
-            authId: userCredential.user.uid,
+            city: formData.city.trim(),
+            deliveryAddres: formData.deliveryAddres.trim(),
+            email: formData.email.trim(),
+            name: formData.name.trim(),
+            phoneNumber: formData.phoneNumber.trim(),
+            postcode: formData.postcode.trim(),
+            surname: formData.surname.trim(),
+            authId: userCredential.user.uid.trim(),
             wishlist: [],
             role: ROLES.BASE_ROLE
           }
