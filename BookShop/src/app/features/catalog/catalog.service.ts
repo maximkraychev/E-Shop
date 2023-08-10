@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { PAGE_SIZE } from 'src/app/config/catalog-page-size';
 import { COLLECTIONS } from 'src/app/config/firebase-collections';
 import { IBook } from 'src/app/core/interfaces/book.interface';
 import { IFilterData } from 'src/app/core/interfaces/catalog-filter-interface';
@@ -8,13 +9,11 @@ import { GetDataPaginationService } from 'src/app/core/services/get-data-paginat
 @Injectable()
 export class CatalogService {
 
-  private PAGE_SIZE: number = 4;
-
   constructor(private paginationService: GetDataPaginationService<IBook>) { }
 
   getCatalogPage(firstShownDocument: string | number | null, lastShownDocument: string | number | null, sort: ISortData, filter: IFilterData) {
     return this.paginationService
-      .getPaginatedData(COLLECTIONS.BOOKS, this.PAGE_SIZE, firstShownDocument, lastShownDocument, sort, filter);
+      .getPaginatedData(COLLECTIONS.BOOKS, PAGE_SIZE.CATALOG, firstShownDocument, lastShownDocument, sort, filter);
   }
 
   getBooksCollectionSize() {
