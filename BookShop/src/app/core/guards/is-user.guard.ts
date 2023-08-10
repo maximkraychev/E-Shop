@@ -17,8 +17,7 @@ export const isUserGuard: CanMatchFn = (route, segments) => {
         return true
       } else {
         errorService.pushErrorMsg('Only users have access to this page');
-        router.navigate(['/user/login']);
-        return false;
+        return router.createUrlTree(['/user/login']);
       }
     })
   )
