@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { ThankYouForPurchaesComponent } from './shared/components/thank-you-for-purchaes/thank-you-for-purchaes.component';
+import { isAdminGuard } from './core/guards/is-admin.guard';
 // import { UserResolverService } from './core/services/user-resolver.service';
 
 const routes: Routes = [
@@ -11,7 +12,7 @@ const routes: Routes = [
   { path: 'catalog', loadChildren: () => import('./features/catalog/catalog.module').then(m => m.CatalogModule) },
   { path: ':id/details', loadChildren: () => import('./features/details/details.module').then(m => m.DetailsModule) },
   { path: 'shopping-cart', loadChildren: () => import('./features/shop-card/shop-cart.module').then(m => m.ShopCardModule) },
-  { path: 'admin-panel', loadChildren: () => import('./features/admin-panel/admin-panel-routing.module').then(m => m.AdminPanelRoutingModule) },
+  { path: 'admin-panel', canMatch:[isAdminGuard], loadChildren: () => import('./features/admin-panel/admin-panel-routing.module').then(m => m.AdminPanelRoutingModule) },
   { path: 'thank-you', component: ThankYouForPurchaesComponent},
   { path: '**', component: NotFoundComponent}
 ];
