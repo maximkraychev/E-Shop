@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { BestDiscountsService } from './best-discounts.service';
-import { IBook } from 'src/app/core/interfaces/book.interface';
 import { ErrorPopupService } from 'src/app/core/services/error-popup.service';
 import { Subscription } from 'rxjs';
+import { IBookAndId } from 'src/app/core/interfaces/book-with-id.interface';
 
 @Component({
   selector: 'app-best-discounts-section',
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class BestDiscountsComponent implements OnDestroy {
 
-  booksData: {id: string, book: IBook}[] = [];
+  booksData: IBookAndId[] = [];
 
   private dataSub!: Subscription;
 
