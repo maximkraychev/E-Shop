@@ -17,7 +17,7 @@ export class GetDataPaginationService<T> {
     startAfter: string | number | null,
     startBefore: string | number | null,
     sort: ISortData,
-    filter: IFilterData)
+    filter?: IFilterData)
     : Observable<{ id: string, book: T }[]> {
 
     let ref = this.afs.collection(collectionName, ref => {
