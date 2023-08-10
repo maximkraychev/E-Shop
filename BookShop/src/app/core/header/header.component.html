@@ -1,15 +1,15 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+<nav class="navbar navbar-expand-lg text-light bg-body-tertiary">
   <div class="container-xxl">
       <a routerLink="/home" class="navbar-brand">
-          <span class="fw-bold text-secondary display-6 open-sans">
+          <span class="title fw-bold text-secondary display-6 open-sans">
               Book Store
           </span>
       </a>
 
-      <form class="d-flex" role="search">
+      <!-- <form class="d-flex" role="search">
           <input class="form-control me-2 open-sans" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-secondary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-      </form>
+      </form> -->
 
       <!-- toggle button -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav"
@@ -23,6 +23,9 @@
               <li class="nav-item">
                   <a routerLink="/catalog" class="nav-link open-sans"> <i class="fa-solid fa-layer-group px-1"></i>Catalog</a>
               </li>
+              <li class="nav-item">
+                  <a routerLink="/shopping-cart" class="nav-link open-sans"><i class="fa-solid fa-cart-shopping px-1"></i>My card</a>
+                </li>
 
             <ng-container *ngTemplateOutlet=" userState ? forUserTemplate : forGuestTemplate"></ng-container>
 
@@ -36,9 +39,6 @@
             </ng-template>
 
             <ng-template #forUserTemplate>
-                <li class="nav-item">
-                    <a routerLink="/shopping-cart" class="nav-link open-sans"><i class="fa-solid fa-cart-shopping px-1"></i>My card</a>
-                  </li>
                 <li class="nav-item">
                     <a href="" class="nav-link open-sans"><i class="fa-solid fa-heart px-1"></i>Wishlist</a>
                   </li>

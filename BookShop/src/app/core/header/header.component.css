@@ -1,7 +1,10 @@
 .nav-link:hover {
     color: white;
     background-color: #6C757D;
-    /* border-radius: 10%; */
+}
+
+.title {
+    color: #575757;
 }
 
 .open-sans{
@@ -11,3 +14,32 @@
     font-family: 'Open Sans', sans-serif; 
     font-style: italic  
 }
+
+
+
+
+/* a{
+    color: #FFFFFF
+}
+.navbar-light .navbar-nav .nav-link:active {
+    color: #FFFFFF; 
+}
+
+.title {
+    color: #FFFFFF;
+}
+
+a:hover {
+    color: #666666;
+}
+.title:hover {
+    color: #666666;
+}
+
+nav {
+    background-color: #333333 !important;
+}
+
+.navbar-toggler {
+    background-color: #FFFFFF;
+} */
