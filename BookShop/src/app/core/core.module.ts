@@ -5,13 +5,15 @@ import { FooterComponent } from './footer/footer.component';
 import { RouterLink } from '@angular/router';
 import { MainLoaderComponent } from './main-loader/main-loader.component';
 import { ErrorComponentComponent } from './error-component/error-component.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
     MainLoaderComponent,
-    ErrorComponentComponent
+    ErrorComponentComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
