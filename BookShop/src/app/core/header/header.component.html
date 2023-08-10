@@ -48,6 +48,9 @@
                 <li class="nav-item">
                     <a routerLink="/user/logout" class="nav-link open-sans"><i class="fa-solid fa-arrow-up-from-bracket px-1"></i>Logout</a>
                 </li>
+                <li *ngIf="isAdmin" class="nav-item">
+                    <a routerLink="/admin-panel" class="nav-link open-sans"><i class="fa-solid fa-unlock px-1"></i>Admin Panel</a>
+                </li>
             </ng-template>
             
               
