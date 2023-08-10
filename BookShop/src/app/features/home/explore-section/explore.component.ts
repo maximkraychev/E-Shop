@@ -3,6 +3,7 @@ import { ExploreService } from './explore.service';
 import { Subscription } from 'rxjs';
 import { IBookAndId } from 'src/app/core/interfaces/book-with-id.interface';
 import { ErrorPopupService } from 'src/app/core/services/error-popup.service';
+import { IBook } from 'src/app/core/interfaces/book.interface';
 
 @Component({
   selector: 'app-explore',
@@ -14,7 +15,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
 
   books: IBookAndId[] = [];
   dataSub!: Subscription;
-  constructor(private exploreService: ExploreService,private errorService: ErrorPopupService){}
+  constructor(private exploreService: ExploreService, private errorService: ErrorPopupService){}
 
   ngOnInit(): void {
     this.dataSub = this.exploreService.getRandomBooks().subscribe({
