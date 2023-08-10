@@ -110,7 +110,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
       // If we are in edit mode and we have the user id update the profile info in fireStore;
       if (this.editMode && this.userId && hasAChangeBeenMade) {
-        await this.firebaseUserService.updateUserData(this.userId, this.form.form.value);
+        const formData: IUserFormProfile = this.form.form.value;
+        const dataToSave: IUserFormProfile = {
+          name: formData.name.trim(),
+          surname: formData.surname.trim(),
+          deliveryAddres: formData.deliveryAddres.trim(),
+          email: formData.email.trim(),
+          phoneNumber: formData.phoneNumber.trim(),
+          postcode: formData.postcode.trim(),
+          city: formData.city.trim(),
+        } 
+        await this.firebaseUserService.updateUserData(this.userId, dataToSave);
       }
       
       this.editMode = !this.editMode;

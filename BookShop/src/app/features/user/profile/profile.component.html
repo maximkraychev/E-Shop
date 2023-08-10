@@ -14,7 +14,7 @@
                             <h4 class="text-right">Profile Settings</h4>
                         </div>
                         <div class="row mt-2">
-
+                            
                             <!-- Name -->
                             <div class="col-md-6">
                                 <label class="labels" for="name">Name</label>
@@ -24,8 +24,25 @@
                                     id="name" 
                                     class="form-control" 
                                     [disabled]="!editMode" 
-                                    ngModel #name="ngModel"
+                                    ngModel 
+                                    #name="ngModel"
+                                    required
+                                    minlength="3"
+                                    maxlength="20"
+                                    trim
                                 >
+
+                                <ng-container *ngIf="name.touched">
+                                    <p class="error" *ngIf="name?.errors?.['required']">
+                                        First Name is required.
+                                    </p>
+                                    <p class="error" *ngIf="name?.errors?.['minlength']">
+                                        First Name must be at least 3 characters long.
+                                    </p>
+                                    <p class="error" *ngIf="name?.errors?.['maxlength']">
+                                        First Name cannot exceed 20 characters.
+                                    </p>
+                                </ng-container>
                             </div>
 
                             <!-- Surname -->
@@ -39,7 +56,24 @@
                                     [disabled]="!editMode"  
                                     ngModel 
                                     #surname="ngModel"
+                                    required
+                                    minlength="3"
+                                    maxlength="20"
+                                    trim
                                 >
+
+                                <ng-container *ngIf="surname.touched">
+                                    <p class="error" *ngIf="surname?.errors?.['required']">
+                                        Surname is required.
+                                    </p>
+                                    <p class="error" *ngIf="surname?.errors?.['minlength']">
+                                        Surname must be at least 3 characters long.
+                                    </p>
+                                    <p class="error" *ngIf="city?.errors?.['maxlength']">
+                                        Sirname name cannot exceed 20 characters.
+                                    </p>
+                                </ng-container>
+
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -55,11 +89,25 @@
                                     [disabled]="!editMode" 
                                     ngModel 
                                     #email="ngModel"
+                                    required 
+                                    pattern="^[\w]+@[\w]+\.[\w]+$"
+                                    trim
                                 >
+
+                                <ng-container *ngIf="email.touched">
+                                    <p class="error" *ngIf="email?.errors?.['required']">
+                                        Email is required.
+                                    </p>
+                                    <p class="error" *ngIf="email?.errors?.['pattern']">
+                                        Email must be a valid email.
+                                    </p>
+                                </ng-container>
+
                             </div>
 
                             <!-- Phone number -->
                             <div class="col-md-12">
+
                                 <label class="labels" for="phoneNumber">Mobile Number</label>
                                 <input 
                                     type="string" 
@@ -69,7 +117,23 @@
                                     [disabled]="!editMode" 
                                     ngModel 
                                     #phoneNumber="ngModel"
+                                    required
+                                    minlength="8"
+                                    maxlength="20"
+                                    trim
                                 >
+
+                                <ng-container *ngIf="phoneNumber.touched">
+                                    <p class="error" *ngIf="phoneNumber?.errors?.['required']">
+                                        Phone number is required.
+                                    </p>
+                                    <p class="error" *ngIf="phoneNumber?.errors?.['minlength']">
+                                        Phone number must be at least 8 characters long.
+                                    </p>
+                                    <p class="error" *ngIf="city?.errors?.['maxlength']">
+                                        Phone number cannot exceed 20 characters.
+                                    </p>
+                                </ng-container>
                             </div>
 
                             <!-- City -->
@@ -83,7 +147,22 @@
                                     [disabled]="!editMode" 
                                     ngModel 
                                     #city="ngModel"
+                                    required
+                                    minlength="3"
+                                    maxlength="20"
                                 >
+
+                                <ng-container *ngIf="city.touched">
+                                    <p class="error" *ngIf="city?.errors?.['required']">
+                                        City name is required.
+                                    </p>
+                                    <p class="error" *ngIf="city?.errors?.['minlength']">
+                                        City name must be at least 3 characters long.
+                                    </p>
+                                    <p class="error" *ngIf="city?.errors?.['maxlength']">
+                                        City name cannot exceed 20 characters.
+                                    </p>
+                                </ng-container>
                             </div>
 
                             <!-- Delivery Addres -->
@@ -97,7 +176,22 @@
                                     [disabled]="!editMode" 
                                     ngModel 
                                     #deliveryAddres="ngModel"
+                                    required
+                                    minlength="5"
+                                    maxlength="50"
                                 >
+
+                                <ng-container *ngIf="deliveryAddres.touched">
+                                    <p class="error" *ngIf="deliveryAddres?.errors?.['required']">
+                                        Delivery addres is required.
+                                    </p>
+                                    <p class="error" *ngIf="deliveryAddres?.errors?.['minlength']">
+                                        Delivery addres must be at least 5 characters long.
+                                    </p>
+                                    <p class="error" *ngIf="deliveryAddres?.errors?.['maxlength']">
+                                        Delivery addres cannot exceed 50 characters.
+                                    </p>
+                                </ng-container>
                             </div>
 
                             <!-- Postcode -->
@@ -110,7 +204,20 @@
                                     class="form-control" 
                                     [disabled]="!editMode" 
                                     ngModel 
-                                    #postcode="ngModel">
+                                    #postcode="ngModel"
+                                    required
+                                    maxlength="20"
+                                    trim
+                                    >
+
+                                <ng-container *ngIf="postcode.touched">
+                                    <p class="error" *ngIf="postcode?.errors?.['required']">
+                                        Postcode is required.
+                                    </p>
+                                    <p class="error" *ngIf="postcode?.errors?.['maxlength']">
+                                        Postcode cannot exceed 20 characters.
+                                    </p>
+                                </ng-container>
                             </div>
                         </div>
 

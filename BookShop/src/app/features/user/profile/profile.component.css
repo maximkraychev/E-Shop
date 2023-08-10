@@ -35,3 +35,9 @@ body {
 .labels {
     font-size: 11px
 }
+
+.error {
+    background-color: rgb(255, 0, 0, 0.5);
+    border-radius: 10px;
+    word-wrap: break-word
+}
