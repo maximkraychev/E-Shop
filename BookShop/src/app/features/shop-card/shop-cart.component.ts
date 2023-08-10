@@ -20,15 +20,17 @@ export class CardComponent implements OnDestroy, OnInit {
     // Load books from session store and if its not null save it in component;
     const sessionData = this.shoppingCartService.getShopCart();
 
-    if(sessionData != null) {
+    if (sessionData != null) {
 
       // Check for dublicate and remove them;
       const setOfBooks = new Set<string>
 
-      for(const book of sessionData.reverse()) { // reverse is used so the lates changes will be shown;
-        if(!setOfBooks.has(book.id)) {
-          this.books.push(book);
-          setOfBooks.add(book.id);
+      //  If there are dublicate save the last added; 
+      //  It need to start from the end thats why we dont use for of;
+      for(let index: number = sessionData.length - 1; index >= 0; index--) {
+        if(!setOfBooks.has(sessionData[index].id)) {
+          this.books.push(sessionData[index]);
+          setOfBooks.add(sessionData[index].id);
         }
       }
     }
@@ -70,7 +72,7 @@ export class CardComponent implements OnDestroy, OnInit {
   onItemRemove(id: string) {
     const index = this.books.findIndex((x) => x.id == id);
 
-    if(index >= 0) {
+    if (index >= 0) {
       this.books.splice(index, 1);
       this.calculateTotal();
     }

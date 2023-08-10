@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './shop-cart-routing.module';
 import { CardComponent } from './shop-cart.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -10,7 +11,7 @@ import { CardComponent } from './shop-cart.component';
     CardComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     UserRoutingModule
   ]
 })

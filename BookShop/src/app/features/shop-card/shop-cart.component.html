@@ -26,7 +26,8 @@
                     <input style="width: 100px;" class="form-control me-4" type="number" min="1" max="100" value="{{book.quantity}}" (change)="onQuantityChange($event, book.id)">
                   </div>
                   <div class="">
-                    <p class="h6">${{book.price * book.quantity}}</p> <br />
+                    <app-promotion-card [regularPrice]="book.price * book.quantity" [discount]="book.discount"></app-promotion-card>
+                    <!-- <p class="h6">${{book.price * book.quantity}}</p> <br /> -->
                     <small class="text-muted text-nowrap"> ${{book.price.toFixed(2)}} / per item </small>
                   </div>
                 </div>
