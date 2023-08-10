@@ -8,6 +8,7 @@ import { PasswordMatchDirective } from './directives/password-match-validator.di
 import { LoadButtonComponent } from './components/load-button/load-button.component';
 import { PromotionCardComponent } from './components/promotion-card/promotion-card.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ThankYouForPurchaesComponent } from './components/thank-you-for-purchaes/thank-you-for-purchaes.component';
 
 
 
@@ -18,7 +19,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     PasswordMatchDirective,
     LoadButtonComponent,
     PromotionCardComponent,
-    LoaderComponent
+    LoaderComponent,
+    ThankYouForPurchaesComponent
   ],
   imports: [
     CommonModule,
