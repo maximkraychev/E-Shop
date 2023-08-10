@@ -8,7 +8,8 @@ import { IFilterData } from 'src/app/core/interfaces/catalog-filter-interface';
 import { SelectOptionValues } from 'src/app/core/interfaces/select-option-values.type';
 import { SORT_TABLE } from 'src/app/config/sort-table';
 import { ISortData } from 'src/app/core/interfaces/catalog-sort.interface';
-import { PAGE_SIZE } from 'src/app/config/catalog-page-size';
+import { PAGE_SIZE } from 'src/app/config/page-size';
+import { IBookAndId } from 'src/app/core/interfaces/book-with-id.interface';
 
 @Component({
   selector: 'app-catalog',
@@ -29,7 +30,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
   //Books data;
   collectionSize!: number;
-  loadedBooks: { id: string, book: IBook }[] | [] = [];
+  loadedBooks: IBookAndId[] | [] = [];
 
   //For pagination;
   firstShownDocument: string | number | null = null;
@@ -113,7 +114,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
     }));
   }
 
-  managerForFirstAndLastDocument(data: { id: string, book: IBook }[]) {
+  managerForFirstAndLastDocument(data: IBookAndId[]) {
     // If we have data save the first and last required param;
     // This is used for starting point for the next forwrd or backward action;
     if (data.length > 0) {

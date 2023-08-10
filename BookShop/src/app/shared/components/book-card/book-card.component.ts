@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { IBookAndId } from 'src/app/core/interfaces/book-with-id.interface';
 import { IBook } from 'src/app/core/interfaces/book.interface';
 import { ShopingCartManagerService } from 'src/app/core/services/shopping-cart-manager.service';
 
@@ -9,7 +10,7 @@ import { ShopingCartManagerService } from 'src/app/core/services/shopping-cart-m
 })
 export class BookCardComponent {
 
-  @Input('book') data!: { id: string, book: IBook };
+  @Input('book') data!: IBookAndId;
 
   constructor(private shopCartService: ShopingCartManagerService){}
    
