@@ -1,0 +1,86 @@
+/* styles.css */
+
+/* Global reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+section {
+    font-family: Arial, sans-serif;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: rgb(33, 37, 41);
+    color: #fff;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 20px;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+
+/* Main Content */
+.main-content {
+    padding: 20px;
+}
+
+/* Table */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+thead {
+    background-color: #f2f2f2;
+}
+
+/* Media queries for responsive behavior */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        position: static;
+        transform: none;
+        background-color: initial;
+    }
+
+    .sidebar ul {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+    }
+
+    .sidebar ul li {
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+
+    .navbar-toggler {
+        display: block;
+    }
+}
