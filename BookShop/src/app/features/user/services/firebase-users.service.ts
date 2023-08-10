@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { COLLECTIONS } from 'src/app/config/firebase-collections';
+import { IUserFormProfile } from 'src/app/core/interfaces/user-data-fromProfile.interface';
 import { IUser } from 'src/app/core/interfaces/user.interface';
 import { FirebaseCRUTService } from 'src/app/core/services/firebase-crut.service';
 
@@ -19,7 +20,7 @@ export class FirebaseUsersService {
     return (this.fireService.getById(documentId, COLLECTIONS.USERS)) as Observable<IUser | undefined>; 
   }
 
-  updateUserData(documentId: string, userData: IUser): Promise<void> {
+  updateUserData(documentId: string, userData: IUserFormProfile): Promise<void> {
     return this.fireService.updateData(documentId, userData, COLLECTIONS.USERS);
   }
 }
