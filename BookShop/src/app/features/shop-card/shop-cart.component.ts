@@ -22,6 +22,10 @@ export class CardComponent implements OnDestroy, OnInit {
   discount: number = 0;
   totalPriceAfterDiscount: number = 0;
 
+  //  Handle purchase-btn status when clicked disable the button;
+  //  And enable again based on logic in component;
+  purchaseBtnLoadingStatus: boolean = false;
+
   constructor(
     private shoppingCartService: ShopingCartManagerService,
     private router: Router,
@@ -94,6 +98,14 @@ export class CardComponent implements OnDestroy, OnInit {
 
 
   onPurchase() {
+
+    if (this.purchaseBtnLoadingStatus) {
+      // If the button status is loading true don't execute more orders until the first one is finish
+      return
+    }
+
+    this.purchaseBtnLoadingStatus = true;
+
     this.userStateService.user$.pipe(take(1)).subscribe({
       next: (userStatus) => {
         if (userStatus == null) {
@@ -108,12 +120,16 @@ export class CardComponent implements OnDestroy, OnInit {
             this.books = []; // ng on destroy will take care of the rest;
             this.router.navigate(['/thank-you']);
           })
-          .catch((err) => this.errorService.pushErrorMsg(err.messageor));
+          .catch((err) => {
+            this.errorService.pushErrorMsg(err.messageor);
+            this.purchaseBtnLoadingStatus = true;
+          });
 
       },
       error: (err) => {
         console.error(err);
         this.errorService.pushErrorMsg(err.message);
+        this.purchaseBtnLoadingStatus = true;
       }
     })
   }
