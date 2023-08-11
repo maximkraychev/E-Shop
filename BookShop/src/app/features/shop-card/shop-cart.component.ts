@@ -6,11 +6,13 @@ import { Router } from '@angular/router';
 import { UserStateService } from 'src/app/core/services/user-state.service';
 import { ErrorPopupService } from 'src/app/core/services/error-popup.service';
 import { take } from 'rxjs';
+import { FinalizeOrderService } from './finalize-order.service';
 
 @Component({
   selector: 'app-card',
   templateUrl: './shop-cart.component.html',
-  styleUrls: ['./shop-cart.component.css']
+  styleUrls: ['./shop-cart.component.css'],
+  providers: [FinalizeOrderService]
 })
 export class CardComponent implements OnDestroy, OnInit {
 
@@ -21,13 +23,14 @@ export class CardComponent implements OnDestroy, OnInit {
   totalPriceAfterDiscount: number = 0;
 
   constructor(
-    private shoppingCartService: ShopingCartManagerService, 
-    private router: Router, 
+    private shoppingCartService: ShopingCartManagerService,
+    private router: Router,
     private userStateService: UserStateService,
-    private errorService: ErrorPopupService
-    ) {
+    private errorService: ErrorPopupService,
+    private finalizeOrderService: FinalizeOrderService
+  ) {
 
-      
+
     // Load books from session store and if its not null save it in component;
     const sessionData = this.shoppingCartService.getShopCart();
 
@@ -38,8 +41,8 @@ export class CardComponent implements OnDestroy, OnInit {
 
       //  If there are dublicate save the last added; 
       //  It need to start from the end thats why we dont use for of;
-      for(let index: number = sessionData.length - 1; index >= 0; index--) {
-        if(!setOfBooks.has(sessionData[index].id)) {
+      for (let index: number = sessionData.length - 1; index >= 0; index--) {
+        if (!setOfBooks.has(sessionData[index].id)) {
           this.books.push(sessionData[index]);
           setOfBooks.add(sessionData[index].id);
         }
@@ -91,18 +94,22 @@ export class CardComponent implements OnDestroy, OnInit {
 
 
   onPurchase() {
-     this.userStateService.user$.pipe(take(1)).subscribe({
+    this.userStateService.user$.pipe(take(1)).subscribe({
       next: (userStatus) => {
-        if(userStatus == null) {
+        if (userStatus == null) {
           this.errorService.pushErrorMsg('Oops! You must be a registered user to make a purchase.');
           this.router.navigate(['/user/login']);
           return;
         }
-        
-        this.books = []; // ng on destroy will take care of the rest;
-        this.router.navigate(['/thank-you']);
-        //  TODO save data in firestore;
-        //  and redirect to thank you for your purchase page;
+
+        const dataForOrder = this.books.map(x => ({ title: x.title, id: x.id, quantity: x.quantity })); // Take only needed property for order
+        this.finalizeOrderService.finalizeOrder(dataForOrder, this.totalPriceAfterDiscount)
+          .then(() => {
+            this.books = []; // ng on destroy will take care of the rest;
+            this.router.navigate(['/thank-you']);
+          })
+          .catch((err) => this.errorService.pushErrorMsg(err.messageor));
+
       },
       error: (err) => {
         console.error(err);
