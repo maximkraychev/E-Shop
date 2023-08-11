@@ -4,7 +4,16 @@ import { AdminPanelComponent } from './admin-panel.component';
 
 
 const routes: Routes = [
-  { path: '', component: AdminPanelComponent },
+  {
+    path: '', component: AdminPanelComponent, children:
+      [
+        {
+          path: 'create-book',
+          loadChildren: () => import('./create-book/create-book.module').then(m => m.CreateBookModule)
+        }
+      ]
+  },
+
 ];
 
 @NgModule({
