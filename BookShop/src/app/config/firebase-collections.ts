@@ -1,9 +1,9 @@
 const BOOKS = 'books';
 const USERS = 'users';
-const AUTHORS = 'authors';
+const ORDERS = 'orders';
 
 export const COLLECTIONS = {
     BOOKS,
     USERS,
-    AUTHORS
+    ORDERS
 }
