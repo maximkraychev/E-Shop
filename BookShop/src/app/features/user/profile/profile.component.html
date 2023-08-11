@@ -226,6 +226,7 @@
                             <!-- <button class="btn btn-primary profile-button" type="submit">Save Profile</button> -->
                             <app-load-button
                             [loading]="btnLoading"
+                            [is-disabled]="profileForm.invalid"
                             add-class="btn btn-primary profile-button"
                             >{{btnTitle}}</app-load-button>
                         </div>
