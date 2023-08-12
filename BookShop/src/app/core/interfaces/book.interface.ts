@@ -6,7 +6,6 @@ export interface IBook {
     length: number;
     price: number;
     discount: number;
-    genre: string[];
     image: string;
     description: string;
 }
