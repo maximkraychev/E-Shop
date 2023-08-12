@@ -76,7 +76,7 @@ https://book-store-34ab8.web.app/
 ![catalog](https://github.com/maximkraychev/E-Shop/blob/main/screenshots/Catalog.PNG)
 
 ## Shopping Cart  
-![shopping-cart](https://github.com/maximkraychev/E-Shop/blob/main/screenshots/Catalog.PNG)
+![shopping-cart](https://github.com/maximkraychev/E-Shop/blob/main/screenshots/shopping-cart.PNG)
 
 ## Login
 ![login](https://github.com/maximkraychev/E-Shop/blob/main/screenshots/Login.PNG)
