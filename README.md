@@ -65,4 +65,6 @@ https://book-store-34ab8.web.app/
     - Password: 123456
 
 
-## Screenshots
+# Screenshots
+
+![home-page-1](https://github.com/maximkraychev/E-Shop/blob/main/screenshots/home1.PNG)
