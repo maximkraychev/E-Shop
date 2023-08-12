@@ -39,7 +39,7 @@ Welcome to Book Shop, where you can discover all sorts of exciting stories and a
 
  - Opportunity to create new book offers
  - List with all orders
- - Managment of orders
+ - Management of orders
 
 
 
