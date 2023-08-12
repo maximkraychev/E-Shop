@@ -1,4 +1,4 @@
-# Welcome to my Angular project's README! 
+# 👋 Welcome to my Angular project's README! 
 
 Hello there! I'm excited to share the result of my dedicated efforts during the SoftUni Angular course.
 I've built this project using Angular for the front-end and Firebase for the back-end (Firestore Database, Firebase Authentication, and Firebase Storage). 
