@@ -106,8 +106,8 @@
 
                  <!-- Language input -->
                  <div class="form-outline mb-4">
-                    <ng-container *ngIf="discount.touched">
-                        <p class="error" *ngIf="discount?.errors?.['required']">
+                    <ng-container *ngIf="language.touched">
+                        <p class="error" *ngIf="language?.errors?.['required']">
                             Language is required.
                         </p>
                     </ng-container>
@@ -167,14 +167,6 @@
                 >{{btnTitile}}</app-load-button>
 
                 </div> 
-
-                <div class="row mb-4">
-                    <div class="col d-flex justify-content-center">
-                        <div class="text-center">
-                            <p>Already a member? <a routerLink="/user/login">Login</a></p>
-                        </div>
-                    </div>
-                </div>
             </form>
         </div>
     </div>
