@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminPanelComponent } from './admin-panel.component';
-import { CreateBookComponent } from './create-book/create-book.component';
-import { OrdersPanelComponent } from './orders-panel/orders-panel.component';
-
 
 const routes: Routes = [
   {
@@ -11,11 +8,13 @@ const routes: Routes = [
       [
         {
           path: 'create-book',
-          component: CreateBookComponent,
+          // component: CreateBookComponent,
+          loadChildren: () => import('./create-book/create-book.module').then(m => m.CreateBookModule)
         },
         {
           path: 'orders',
-          component: OrdersPanelComponent
+          // component: OrdersPanelComponent
+          loadChildren: () => import('./orders-panel/orders-panel.module').then(m => m.OrdersPanelModule)
         }
       ]
   },
