@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'catalog', loadChildren: () => import('./features/catalog/catalog.module').then(m => m.CatalogModule) },
   { path: ':id/details', loadChildren: () => import('./features/details/details.module').then(m => m.DetailsModule) },
   { path: 'shopping-cart', loadChildren: () => import('./features/shop-card/shop-cart.module').then(m => m.ShopCardModule) },
-  { path: 'admin-panel', canMatch:[isAdminGuard], loadChildren: () => import('./features/admin-panel/admin-panel-routing.module').then(m => m.AdminPanelRoutingModule) },
+  { path: 'admin-panel', canMatch:[isAdminGuard], loadChildren: () => import('./features/admin-panel/admin-panel.module').then(m => m.AdminPanelModule) },
   { path: 'thank-you', component: ThankYouForPurchaesComponent},
   { path: '**', component: NotFoundComponent}
 ];
