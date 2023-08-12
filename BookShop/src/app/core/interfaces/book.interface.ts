@@ -1,4 +1,4 @@
-export interface IBook {
+interface IBaseBook {
     title: string;
     author: string;
     year: number;
@@ -6,6 +6,14 @@ export interface IBook {
     length: number;
     price: number;
     discount: number;
-    image: string;
     description: string;
+}
+
+
+export interface IBook extends IBaseBook {
+    image: string;
+}
+
+export interface IBookUpload extends IBaseBook {
+    image: File;
 }
