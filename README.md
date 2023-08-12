@@ -4,11 +4,11 @@ Hello there! I'm excited to share the result of my dedicated efforts during the 
 I've built this project using Angular for the front-end and Firebase for the back-end (Firestore Database, Firebase Authentication, and Firebase Storage). 
 Feel free to explore. The project is hosted on Firebase: https://book-store-34ab8.web.app/
 
-# Introduction
+## Introduction
 
-Book Shop: Your Online Book Adventure!
+### Book Shop: Your Online Book Adventure!
 
-📚 Explore Amazing Books
+🚀 Explore Amazing Books
 
 Welcome to Book Shop, where you can discover all sorts of exciting stories and adventures from the comfort of your screen.
 
@@ -24,7 +24,25 @@ Welcome to Book Shop, where you can discover all sorts of exciting stories and a
 
  Start your book journey with Book Shop today! 📖✨
 
-## Live version:
+## Features
+
+
+### User-Focused Features 📚
+
+ - Catalog with books
+ - Possibility to order
+ - Shopping cart 
+ - Register and login
+ - Personal profile page
+
+### Admin-Powered Features 🛠️
+
+ - Opportunity to create new book offers
+ - List with all orders
+ - Managment of orders
+
+
+## Live version: 🌐
 
 https://book-store-34ab8.web.app/
 
