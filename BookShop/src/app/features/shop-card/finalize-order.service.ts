@@ -3,7 +3,7 @@ import { IOrederBook } from './order-book.interface';
 import { UserStateService } from 'src/app/core/services/user-state.service';
 import { take } from 'rxjs';
 import { FirebaseCRUTService } from 'src/app/core/services/firebase-crut.service';
-import { IOreder } from './order.interface';
+import { IOreder } from '../../core/interfaces/order.interface';
 import { IUser } from 'src/app/core/interfaces/user.interface';
 import { ErrorPopupService } from 'src/app/core/services/error-popup.service';
 import { Router } from '@angular/router';
