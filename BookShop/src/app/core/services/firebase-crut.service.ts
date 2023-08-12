@@ -39,22 +39,14 @@ export class FirebaseCRUTService<T> {
   }
 
 
-
-
-
-  //------------------TODO make all methods below abstract--------------------
-
-  
-
-  // Read operation - get all documents in a collection
-  getAll(): Observable<any[]> {
-    return this.afs.collection('books').valueChanges();
+   // Read operation - get all documents in a collection
+   getAll(collectionName: string): Observable<T[]> {
+    return this.afs.collection<T>(collectionName).valueChanges();
   }
 
+    // Delete operation - delete a document from a collection
+    delete(itemId: string, collectionName: string): Promise<void> {
+      return this.afs.collection(collectionName).doc(itemId).delete();
+    }
 
-
-  // Delete operation - delete a document from a collection
-  delete(itemId: string): Promise<void> {
-    return this.afs.collection('books').doc(itemId).delete();
-  }
 }
