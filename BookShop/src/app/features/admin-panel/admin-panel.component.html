@@ -1,29 +1,15 @@
-
 <section>
     <div class="d-flex justify-content-center" > <!-- style="height: 100vh;" Center the container vertically and horizontally -->
     <div class="container">
         <div class="row">
-            <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
-                <div class="position-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Orders</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <!-- Admin nav bar -->
+            <div class="col-md-3 col-lg-2 d-md-block bg-dark">
+                <app-admin-sidebar></app-admin-sidebar>
+            </div>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <h1>Table Example</h1>
+                <router-outlet></router-outlet>
+                <!-- <h1>Table Example</h1>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -66,11 +52,10 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </div> -->
             </main>
         </div>
     </div>
-
     </div>
 </section>
 
