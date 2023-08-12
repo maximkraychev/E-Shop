@@ -67,4 +67,30 @@ https://book-store-34ab8.web.app/
 
 # Screenshots
 
+## Home Page
 ![home-page-1](https://github.com/maximkraychev/E-Shop/blob/main/screenshots/home1.PNG)
+![home-page-2](https://github.com/maximkraychev/E-Shop/blob/main/screenshots/home2.PNG)
+![home-page-2](https://github.com/maximkraychev/E-Shop/blob/main/screenshots/home3.PNG)
+
+## Catalog 
+![catalog](https://github.com/maximkraychev/E-Shop/blob/main/screenshots/Catalog.PNG)
+
+## Shopping Cart  
+![shopping-cart](https://github.com/maximkraychev/E-Shop/blob/main/screenshots/Catalog.PNG)
+
+## Login
+![login](https://github.com/maximkraychev/E-Shop/blob/main/screenshots/Login.PNG)
+
+## Register
+![register](https://github.com/maximkraychev/E-Shop/blob/main/screenshots/register.PNG)
+
+## Profile
+![profile](https://github.com/maximkraychev/E-Shop/blob/main/screenshots/profile.PNG)
+
+# Admin Panel
+
+## Order List
+![orders](https://github.com/maximkraychev/E-Shop/blob/main/screenshots/orders.PNG)
+
+## New Book
+![new-book](https://github.com/maximkraychev/E-Shop/blob/main/screenshots/new-book.PNG)
