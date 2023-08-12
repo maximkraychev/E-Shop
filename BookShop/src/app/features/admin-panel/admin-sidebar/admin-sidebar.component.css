@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sidebar {
+    background-color: rgb(33, 37, 41);
+    color: #fff;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 20px;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        position: static;
+        transform: none;
+        background-color: initial;
+    }
+
+    .sidebar ul {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+    }
+
+    .sidebar ul li {
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+
+    .navbar-toggler {
+        display: block;
+    }
+}
