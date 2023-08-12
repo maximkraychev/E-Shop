@@ -114,7 +114,16 @@ export class CardComponent implements OnDestroy, OnInit {
           return;
         }
 
-        const dataForOrder = this.books.map(x => ({ title: x.title, id: x.id, quantity: x.quantity })); // Take only needed property for order
+        // Take only needed property for order
+        const dataForOrder = this.books.map(x => { 
+          return {
+            title: x.title, 
+            id: x.id, 
+            quantity: x.quantity, 
+            price: Number((x.price * (1 - x.discount / 100)).toFixed(2))  // return number of discounted price fixed to 2 or less;
+          }
+        }); 
+
         this.finalizeOrderService.finalizeOrder(dataForOrder, this.totalPriceAfterDiscount)
           .then(() => {
             this.books = []; // ng on destroy will take care of the rest;
