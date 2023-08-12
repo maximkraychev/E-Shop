@@ -1,4 +1,4 @@
-const CATALOG = 4;
+const CATALOG = 8;
 const HOME_BEST_DISCOUNTS = 8;
 const EXPLORE_BOOKS = 4;
 
