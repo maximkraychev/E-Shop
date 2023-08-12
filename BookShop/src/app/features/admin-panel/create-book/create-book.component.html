@@ -1,2 +1,181 @@
-<p>create-book works!</p>
-<h1>TESTSTSTSTST</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <form #createBookForm="ngForm" (ngSubmit)="createBookHandler()">
+
+                <h2>Create Book</h2>
+
+                <!-- Title input -->
+                <div class="form-outline mb-4">
+                    <ng-container *ngIf="title.touched">
+                        <p class="error" *ngIf="title?.errors?.['required']">
+                            Title is required.
+                        </p>
+                    </ng-container>
+
+                    <input type="text" id="title" name="title" class="form-control" 
+                        ngModel 
+                        #title="ngModel" 
+                        required 
+                    />
+                    <label class="form-label px-2" for="title">Book Title</label>
+                </div>
+
+                <!-- Author input -->
+                <div class="form-outline mb-4">
+                    <ng-container *ngIf="author.touched">
+                        <p class="error" *ngIf="author?.errors?.['required']">
+                            Author name is required.
+                        </p>
+                    </ng-container>
+
+                    <input type="text" id="author" name="author" class="form-control" 
+                        ngModel 
+                        #author="ngModel" 
+                        required 
+                    />
+                    <label class="form-label px-2" for="author">Author Name</label>
+                </div>
+
+                <!-- Price input -->
+                <div class="form-outline mb-4">
+                    <ng-container *ngIf="price.touched">
+                        <p class="error" *ngIf="price?.errors?.['required']">
+                            Book price is required.
+                        </p>
+                    </ng-container>
+
+                    <input type="number" id="price" name="price" class="form-control" 
+                        ngModel 
+                        #price="ngModel" 
+                        required 
+                    />
+                    <label class="form-label px-2" for="price">Book Price</label>
+                </div>
+
+                <!-- Discount input -->
+                <div class="form-outline mb-4">
+                    <ng-container *ngIf="discount.touched">
+                        <p class="error" *ngIf="discount?.errors?.['required']">
+                            Discount is required.
+                        </p>
+                    </ng-container>
+
+                    <input type="number" id="discount" name="discount" class="form-control"
+                        ngModel 
+                        [ngModel]="0"
+                        #discount="ngModel" 
+                        required 
+                    />
+                    <label class="form-label px-2" for="discount">Discount %</label>
+                </div>
+
+                 <!-- Image upload -->
+                 <div class="form-outline mb-4">
+                    <ng-container *ngIf="image.touched">
+                        <p class="error" *ngIf="image?.errors?.['required']">
+                            Image is required.
+                        </p>
+                    </ng-container>
+
+                    <input type="file" id="image" name="image" class="form-control"
+                        (change)="handleFileInput($event)"
+                        ngModel
+                        #image="ngModel" 
+                        required 
+                    />
+                    <label class="form-label px-2" for="image">Image</label>
+                </div>
+
+
+                <!-- Description input -->
+                <div class="form-outline mb-4">
+                    <ng-container *ngIf="description.touched">
+                        <p class="error" *ngIf="description?.errors?.['required']">
+                            Book description is required.
+                        </p>
+                    </ng-container>
+
+                    <textarea  type="text" rows="4" cols="50" id="description" name="description" class="form-control"
+                        ngModel 
+                        #description="ngModel" 
+                        required 
+                    ></textarea>
+                    <label class="form-label px-2" for="description">Book description</label>
+                </div>
+
+                 <!-- Language input -->
+                 <div class="form-outline mb-4">
+                    <ng-container *ngIf="discount.touched">
+                        <p class="error" *ngIf="discount?.errors?.['required']">
+                            Language is required.
+                        </p>
+                    </ng-container>
+
+                    <input type="text" id="language" name="language" class="form-control"
+                        ngModel 
+                        [ngModel]="'English'"
+                        #language="ngModel" 
+                        required 
+                    />
+                    <label class="form-label px-2" for="language">Language</label>
+                </div>
+
+                 <!-- Year input -->
+                 <div class="form-outline mb-4">
+                    <ng-container *ngIf="year.touched">
+                        <p class="error" *ngIf="year?.errors?.['required']">
+                            Year is required.
+                        </p>
+                    </ng-container>
+
+                    <input type="number" id="year" name="year" class="form-control"
+                        ngModel 
+                        #year="ngModel" 
+                        required 
+                    />
+                    <label class="form-label px-2" for="year">Year</label>
+                </div>
+
+                 <!-- Length input -->
+                 <div class="form-outline mb-4">
+                    <ng-container *ngIf="year.touched">
+                        <p class="error" *ngIf="year?.errors?.['required']">
+                            Length is required.
+                        </p>
+                    </ng-container>
+
+                    <input type="number" id="length" name="length" class="form-control"
+                        ngModel
+                        #length="ngModel" 
+                        required 
+                    />
+                    <label class="form-label px-2" for="length">Length</label>
+                </div>
+
+
+                
+                <!-- Submit button -->
+                <div class="d-flex justify-content-center align-items-center">
+                    <!-- <button type="submit" class="btn btn-primary btn-block mb-4" 
+                    [disabled]="createBookForm.invalid">Sign up</button> -->
+                <app-load-button 
+                    type="submit" 
+                    add-class="btn btn-primary btn-block mb-4" 
+                    [loading]="btnLoad" 
+                    [is-disabled]="createBookForm.invalid"
+                >{{btnTitile}}</app-load-button>
+
+                </div> 
+
+                <div class="row mb-4">
+                    <div class="col d-flex justify-content-center">
+                        <div class="text-center">
+                            <p>Already a member? <a routerLink="/user/login">Login</a></p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
