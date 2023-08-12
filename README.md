@@ -42,9 +42,11 @@ Welcome to Book Shop, where you can discover all sorts of exciting stories and a
  - Managment of orders
 
 
+
 ## Live version: 🌐
 
 https://book-store-34ab8.web.app/
+
 
 **Demo Admin Role:**
 
@@ -61,3 +63,6 @@ https://book-store-34ab8.web.app/
 
     - Email: user@abv.bg  
     - Password: 123456
+
+
+## Screenshots
